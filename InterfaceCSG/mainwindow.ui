@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1038</width>
-    <height>885</height>
+    <height>921</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -217,6 +217,9 @@
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
            <widget class="QSlider" name="translationX">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
             <property name="minimum">
              <number>-500</number>
             </property>
@@ -247,6 +250,9 @@
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
            <widget class="QSlider" name="translationY">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
             <property name="minimum">
              <number>-500</number>
             </property>
@@ -437,7 +443,7 @@
      <x>0</x>
      <y>0</y>
      <width>1038</width>
-     <height>29</height>
+     <height>28</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuCSG">

@@ -7,6 +7,8 @@
 
 #include <limits>
 
+#include <cmath>
+
 
 RenderImg::RenderImg( QWidget *parent ):
 	QGLWidget(QGLFormat(QGL::SampleBuffers), parent),
@@ -15,7 +17,8 @@ RenderImg::RenderImg( QWidget *parent ):
 	m_heightTex(0),
 	m_ptrTex(NULL),
 	m_drawSobel(false),
-	m_BBdraw(false)
+	m_BBdraw(false),
+	m_radius(1.0)
   // QQ INIT A AJOUTER ?
 
 {
@@ -83,6 +86,17 @@ void RenderImg::initializeGL()
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, m_widthTex, m_heightTex, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, m_ptrTex);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
+    //****************************
+    // CODE_TP_CERCLE
+    //****************************
+    for (int i=0; i< NB_P_CIRCLE; ++i)
+	{
+		VectCalc& v= m_circlePoints[i];
+        v[0] = 0.5*cos(2.0f*M_PI/NB_P_CIRCLE*i);
+        v[1] = 0.5*sin(2.0f*M_PI/NB_P_CIRCLE*i);
+	}
+
+	m_center.zero();
 
 }
 
@@ -92,27 +106,43 @@ void RenderImg::paintGL()
 	glClear(GL_COLOR_BUFFER_BIT);
 	glLoadIdentity();		// let's go 2D
 
-	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, m_texture);
-
-	glColor3f(1.0,1.0,1.0);
-	glBegin(GL_QUADS);
-	glTexCoord2f(0,0);
-	glVertex2f( -1,1);
-	glTexCoord2f(0,1);
-	glVertex2f(-1,-1);
-	glTexCoord2f(1,1);
-	glVertex2f( 1,-1);
-	glTexCoord2f(1,0);
-	glVertex2f( 1,1);
+//****************************
+// CODE_TP_CERCLE
+//****************************
+	glPointSize(2.0f);
+	glColor3f(1.,1,0.);
+	glBegin(GL_POINTS);
+    for (int i=0; i< NB_P_CIRCLE; ++i)
+	{
+		VectCalc P(m_circlePoints[i]);
+        P *= m_radius;
+        P += (0.1*m_center);
+		glVertex2fv(P.data());
+	}
 	glEnd();
 
-	glBindTexture(GL_TEXTURE_2D, 0);
-	glDisable(GL_TEXTURE_2D);
 
-	// for debugging
-	if (m_drawSobel)
-		drawSobel();
+//	glEnable(GL_TEXTURE_2D);
+//	glBindTexture(GL_TEXTURE_2D, m_texture);
+
+//	glColor3f(1.0,1.0,1.0);
+//	glBegin(GL_QUADS);
+//	glTexCoord2f(0,0);
+//	glVertex2f( -1,1);
+//	glTexCoord2f(0,1);
+//	glVertex2f(-1,-1);
+//	glTexCoord2f(1,1);
+//	glVertex2f( 1,-1);
+//	glTexCoord2f(1,0);
+//	glVertex2f( 1,1);
+//	glEnd();
+
+//	glBindTexture(GL_TEXTURE_2D, 0);
+//	glDisable(GL_TEXTURE_2D);
+
+//	// for debugging
+//	if (m_drawSobel)
+//		drawSobel();
 
 }
 

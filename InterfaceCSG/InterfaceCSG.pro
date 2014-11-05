@@ -18,11 +18,12 @@ INCLUDEPATH += ../vectorMatrix ../image ../csg ../particle
 LIBS +=  -L ../lib \
 #	-lcsg   \
 #	-limage \
-#	-lvectorMatrix \
+        -lvectorMatrix \
 #   -lparticle \
-        -lboost_thread
+	-lboost_thread
 
-#PRE_TARGETDEPS = ../lib/*
+PRE_TARGETDEPS += ../lib/*.a
+
 
 DESTDIR = ../bin
 
@@ -31,7 +32,6 @@ SOURCES += main.cpp\
 		   renderImg.cpp
 
 HEADERS  += mainwindow.h \
-			renderImg.h \
-    arrayTemplate.h
+			renderImg.h
 
 FORMS    += mainwindow.ui

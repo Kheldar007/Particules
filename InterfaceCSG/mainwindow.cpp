@@ -186,6 +186,11 @@ void MainWindow::transfoChanged()
 	// recupere la primitive courante et lui applique les transformations
 	// VOTRE CODE ICI
 
+    //****************************
+    // CODE_TP_CERCLE
+    //****************************
+	m_render->setRadius(ui->dsb_sx->value());
+	m_render->setCenter(ui->dsb_tx->value(),ui->dsb_ty->value());
 
 	// Option: de même avec un noeud Operation !
 

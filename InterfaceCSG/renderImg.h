@@ -7,6 +7,8 @@
 //#include "vec2f.h"
 //#include "particle.h"
 
+#include "vectCalc.h"
+
 //fprward declaration
 class BoundingBox;
 
@@ -37,8 +39,21 @@ public:
 
    void setBBDraw(bool v) { m_BBdraw = v;}
 
+   //****************************
+   // CODE_TP_CERCLE
+   //****************************
+   void setRadius(float r) { m_radius = r; }
+   void setCenter(float x, float y) { m_center[0] = x; m_center[1] = y; }
 
 protected:
+   //****************************
+   // CODE_TP_CERCLE
+   //****************************
+   static const int NB_P_CIRCLE = 500;
+   float m_radius;
+   VectCalc m_center;
+   VectCalc m_circlePoints[NB_P_CIRCLE];
+
 	/// Qt callbacks
 	void initializeGL();
 	void paintGL();

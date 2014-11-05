@@ -1,61 +1,11 @@
 /**
- * @file    array.h
+ * @file    arrayTemplate.hpp
  * @author  Isabelle Muller
  */
 
 
-# ifndef ARRAY_H
-# define ARRAY_H
-
-
-/**
- * @class Array : template du nombre et du type d'elements.
- */
-template <int N , typename T> class Array
-{
-    protected :
-        /**
-         * @brief m_data Donnee de type T.
-         */
-        T * m_data ;
-        /**
-         * @brief m_size Nombre d'elements.
-         */
-        int m_size ;
-        /**
-         * @brief s_nb Nombre d'objets.
-         */
-        static int s_nb ;
-    public :
-        /**
-         * @brief Constructeur.
-         */
-        Array () ;
-        /**
-         * @brief Constructeur.
-         * @param a Un Array.
-         */
-        Array (const Array <N , T> & a) ;
-        /**
-          * @brief Destructeur.
-          */
-        ~Array () ;
-        /**
-         * @brief  getSize Retourner la taille de l'Array.
-         * @return m_size
-         */
-        int getSize () ;
-        /**
-         * @brief  getData Retourner l'Array.
-         * @return m_data
-         */
-        T * getData () ;
-        /**
-         * @brief resize Modifier la taille.
-         * @param size Nouvelle taille.
-         */
-        void resize (int size) ;
-} ;
+# ifndef ARRAYTEMPLATE_HPP
+# define ARRAYTEMPLATE_HPP
 
 
 template <int N , typename T> Array <N , T>::Array () :
@@ -110,6 +60,17 @@ template <int N , typename T> void Array <N , T>::resize (int size)
     }
     m_data = newData ; // Copier les donnees dans le tableau.
     m_size = size ; // Conserver la nouvelle taille.
+}
+template <int N , typename T> Array <N , T> & Array <N , T>::operator= (const Array <N , T> & a)
+{
+    assert (m_size == a.getSize ()) ; // La taille du nouvel objet doit etre la meme que l'objet courant.
+    int i = 0 ;
+    while (i < m_size)
+    {
+        m_data [i] = a.m_data [i] ; // Copier les donnees de a dans l'objet courant.
+        i ++ ;
+    }
+    return * this ;
 }
 
 
