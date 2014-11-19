@@ -17,7 +17,7 @@ template <int N , typename T> class Array
         /**
          * @brief m_data Donnee de type T.
          */
-        T m_data [N] ;
+        T * m_data ;
         /**
          * @brief m_size Nombre d'elements.
          */
