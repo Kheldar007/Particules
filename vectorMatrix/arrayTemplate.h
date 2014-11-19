@@ -17,7 +17,7 @@ template <int N , typename T> class Array
         /**
          * @brief m_data Donnee de type T.
          */
-        T * m_data ;
+        T m_data [N] ;
         /**
          * @brief m_size Nombre d'elements.
          */
@@ -44,12 +44,12 @@ template <int N , typename T> class Array
          * @brief  getSize Retourner la taille de l'Array.
          * @return m_size
          */
-        int getSize () ;
+        int getSize () const ;
         /**
          * @brief  getData Retourner l'Array.
          * @return m_data
          */
-        T * getData () ;
+        T * getData () const ;
         /**
          * @brief resize Modifier la taille.
          * @param size Nouvelle taille.
@@ -60,7 +60,7 @@ template <int N , typename T> class Array
          * @param  a Nouvel objet a affecter.
          * @return Copie de a.
          */
-        Array <N , T> &::operator= (const Array <N , T> & a) ;
+        Array <N , T> & operator= (const Array <N , T> & a) ;
 } ;
 
 
