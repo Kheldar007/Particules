@@ -12,16 +12,15 @@ template <int N , typename T> int Array <N , T>::s_nb = 0 ; // Aucun objet cree 
 
 
 template <int N , typename T> Array <N , T>::Array () :
-    m_data(NULL) , m_size (N)
+    m_data(new T [N]) , m_size (N)
 {
-    m_data = new T [N] ; // Allouer m_data de la taille N.
     s_nb ++ ; // Creer un objet de plus.
 }
 
 template <int N , typename T> Array <N , T>::Array (const Array <N , T> & a)
 {
-    assert (a.getSize () != 0) ; // Ne pas copier d'Array vide.
-    m_size = a.getSize () ; // Nouvelle taille.
+    assert (a.A_getSize () != 0) ; // Ne pas copier d'Array vide.
+    m_size = a.A_getSize () ; // Nouvelle taille.
     m_data = new T [m_size] ; // Allouer l'Array.
     int i = 0 ;
     while (i < m_size)
@@ -102,9 +101,21 @@ template <int N , typename T> bool Array <N , T>::operator == (const Array <N , 
     return true ; // Aucune erreur rencontree.
 }
 
-template <int N , typename T> void Array <N , T>::swap (Array <N , T> & a)
+template <int N , typename T> void Array <N , T>::A_swap (Array <N , T> & a)
 {
     // Faire l'echange.
+}
+
+template <int N , typename T> void Array <N , T>::A_print ()
+{
+    int i = 0 ;
+    std::cout << "{ " ;
+    while (i < m_size) // Parcourir les elements du tableau.
+    {
+        std::cout << m_data [i] << " " ;
+        i ++ ;
+    }
+    std::cout << "}" << std::endl ;
 }
 
 

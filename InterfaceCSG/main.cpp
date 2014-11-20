@@ -8,9 +8,13 @@ int main(int argc, char *argv[])
     // MainWindow w;
     // w.show();
 
-    /* Test */
+    /* Tests */
 
-    Array <2 , float> * b = new Array <2 , float> () ;
+    Array <2 , float> b = Array <2 , float> () ;
+    b [0] = 3.f ;
+    b [1] = 1.f ;
+    std::cout << "B = " ;
+    b.A_print () ;
 
     /********/
 	

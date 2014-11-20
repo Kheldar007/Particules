@@ -76,10 +76,14 @@ template <int N , typename T> class Array
          */
         bool operator == (const Array <N , T> & a) const ;
         /**
-         * @brief swap Echanger deux Array.
+         * @brief A_swap Echanger deux Array.
          * @param a L'objet a echanger.
          */
-        void swap (Array <N , T> & a) ;
+        void A_swap (Array <N , T> & a) ;
+        /**
+         * @brief A_print Afficher le contenu de l'Array.
+         */
+        void A_print () ;
 } ;
 
 
