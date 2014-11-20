@@ -101,9 +101,10 @@ template <int N , typename T> bool Array <N , T>::operator == (const Array <N , 
     return true ; // Aucune erreur rencontree.
 }
 
-template <int N , typename T> void Array <N , T>::A_swap (Array <N , T> & a)
+template <int N , typename T>
+    void Array <N , T>::A_swap (Array <N , T> & a , Array <N , T> & b)
 {
-    // Faire l'echange.
+    std::swap (a , b) ; // Echanger les pointeurs.
 }
 
 template <int N , typename T> void Array <N , T>::A_print ()

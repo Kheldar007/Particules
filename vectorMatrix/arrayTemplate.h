@@ -10,7 +10,6 @@
 
 /**
  * @class Array : template du nombre et du type d'elements.
- * Todo : échange de 2 Array
  */
 template <int N , typename T> class Array
 {
@@ -77,9 +76,10 @@ template <int N , typename T> class Array
         bool operator == (const Array <N , T> & a) const ;
         /**
          * @brief A_swap Echanger deux Array.
-         * @param a L'objet a echanger.
+         * @param a Un objet a echanger.
+         * @param b Un objet a echanger.
          */
-        void A_swap (Array <N , T> & a) ;
+        static void A_swap (Array <N , T> & a , Array <N , T> & b) ;
         /**
          * @brief A_print Afficher le contenu de l'Array.
          */
