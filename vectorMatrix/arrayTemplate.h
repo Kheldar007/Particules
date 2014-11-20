@@ -28,16 +28,16 @@ template <int N , typename T> class Array
         static int s_nb ;
     public :
         /**
-         * @brief Constructeur.
+         * @brief Array Constructeur.
          */
         Array () ;
         /**
-         * @brief Constructeur.
+         * @brief Array Constructeur.
          * @param a Un Array.
          */
         Array (const Array <N , T> & a) ;
         /**
-          * @brief Destructeur.
+          * @brief ~Array Destructeur.
           */
         ~Array () ;
         /**

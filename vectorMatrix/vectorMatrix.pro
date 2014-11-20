@@ -12,7 +12,8 @@ SOURCES += vectCalc.cpp
 HEADERS += vecttempl.h vectCalc.h \
     arrayTemplate.h \
     arrayTemplate.hpp \
-    vectorTemplate.h
+    vectorTemplate.h \
+    vectorTemplate.hpp
 
 DESTDIR = ../lib
 

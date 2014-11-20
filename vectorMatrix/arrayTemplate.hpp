@@ -88,14 +88,14 @@ template <int N , typename T> Array <N , T> & Array <N , T>::operator = (const A
 
 template <int N , typename T> bool Array <N , T>::operator == (const Array <N , T> & a) const
 {
-    if (m_size != a.A_getSize ()) // Si la taille est differente c'est faux.
-    {
-        return false ;
-    }
+    assert (m_size == a.A_getSize ()) ; // Si la taille est differente c'est faux.
     int i = 0 ;
     while (i < m_size) // Parcourir tous les elements du tableau.
     {
-        // Comparer le tableau.
+        if (m_data [i] != a [i]) // Si un element est different.
+        {
+            return false ;
+        }
         i ++ ;
     }
     return true ; // Aucune erreur rencontree.
