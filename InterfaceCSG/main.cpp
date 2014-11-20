@@ -8,7 +8,11 @@ int main(int argc, char *argv[])
     // MainWindow w;
     // w.show();
 
+    /* Test */
+
     Array <2 , float> * b = new Array <2 , float> () ;
+
+    /********/
 	
 	return a.exec();
 }

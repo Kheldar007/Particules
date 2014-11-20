@@ -10,6 +10,7 @@
 
 /**
  * @class Array : template du nombre et du type d'elements.
+ * Todo : échange de 2 Array
  */
 template <int N , typename T> class Array
 {
@@ -41,26 +42,44 @@ template <int N , typename T> class Array
           */
         ~Array () ;
         /**
-         * @brief  getSize Retourner la taille de l'Array.
+         * @brief  A_getSize Retourner la taille de l'Array.
          * @return m_size
          */
-        int getSize () const ;
+        int A_getSize () const ;
         /**
-         * @brief  getData Retourner l'Array.
-         * @return m_data
+         * @brief  operator [] Retourner une case de l'Array.
+         * @param  i La i-eme case.
+         * @return Renvoyer la case d'indice i.
          */
-        T * getData () const ;
+        T & operator [] (int i) ;
         /**
-         * @brief resize Modifier la taille.
+         * @brief  operator [] Retourner une case de l'Array.
+         * @param  i La i-eme case.
+         * @return Renvoyer la case d'indice i.
+         */
+        T const & operator [] (int i) const ;
+        /**
+         * @brief A_resize Modifier la taille.
          * @param size Nouvelle taille.
          */
-        void resize (int size) ;
+        void A_resize (int size) ;
         /**
-         * @brief  operator= Affectation.
+         * @brief  operator = Affectation.
          * @param  a Nouvel objet a affecter.
          * @return Copie de a.
          */
-        Array <N , T> & operator= (const Array <N , T> & a) ;
+        Array <N , T> & operator = (const Array <N , T> & a) ;
+        /**
+         * @brief  operator == Test d'egalite.
+         * @param  a Un autre Array.
+         * @return Vrai si les objets sont egaux.
+         */
+        bool operator == (const Array <N , T> & a) const ;
+        /**
+         * @brief swap Echanger deux Array.
+         * @param a L'objet a echanger.
+         */
+        void swap (Array <N , T> & a) ;
 } ;
 
 

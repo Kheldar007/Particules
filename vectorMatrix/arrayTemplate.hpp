@@ -8,7 +8,8 @@
 # define ARRAYTEMPLATE_HPP
 
 
-template <int N , typename T> int Array <N , T>::s_nb = 0 ; // Aucun objet cree.
+template <int N , typename T> int Array <N , T>::s_nb = 0 ; // Aucun objet cree pour le moment.
+
 
 template <int N , typename T> Array <N , T>::Array () :
     m_data(NULL) , m_size (N)
@@ -16,6 +17,7 @@ template <int N , typename T> Array <N , T>::Array () :
     m_data = new T [N] ; // Allouer m_data de la taille N.
     s_nb ++ ; // Creer un objet de plus.
 }
+
 template <int N , typename T> Array <N , T>::Array (const Array <N , T> & a)
 {
     assert (a.getSize () != 0) ; // Ne pas copier d'Array vide.
@@ -24,11 +26,12 @@ template <int N , typename T> Array <N , T>::Array (const Array <N , T> & a)
     int i = 0 ;
     while (i < m_size)
     {
-        m_data [i] = a.m_data [i] ; // Remplir l'Array avec les donnees.
+        m_data [i] = a [i] ; // Remplir l'Array avec les donnees.
         i ++ ;
     }
     s_nb ++ ; // Creer un objet de plus.
 }
+
 template <int N , typename T> Array <N , T>::~Array ()
 {
     if (m_data != NULL) // Si le tableau est alloue.
@@ -37,15 +40,23 @@ template <int N , typename T> Array <N , T>::~Array ()
     }
     s_nb -- ; // Supprimer un objet.
 }
-template <int N , typename T> int Array <N , T>::getSize () const
+
+template <int N , typename T> int Array <N , T>::A_getSize () const
 {
     return m_size ;
 }
-template <int N , typename T> T * Array <N , T>::getData () const
+
+template <int N , typename T> T & Array <N , T>::operator [] (int i)
 {
-    return m_data ;
+    return m_data [i] ; // Retourner la i-eme case.
 }
-template <int N , typename T> void Array <N , T>::resize (int size)
+
+template <int N , typename T> T const & Array <N , T>::operator [] (int i) const
+{
+    return m_data [i] ; // Retourner la i-eme case.
+}
+
+template <int N , typename T> void Array <N , T>::A_resize (int size)
 {
     assert (size != 0) ; // La taille ne doit pas etre nulle.
     T * newData = new T [size] ; // Nouveau tableau de la nouvelle taille.
@@ -63,16 +74,37 @@ template <int N , typename T> void Array <N , T>::resize (int size)
     m_data = newData ; // Copier les donnees dans le tableau.
     m_size = size ; // Conserver la nouvelle taille.
 }
-template <int N , typename T> Array <N , T> & Array <N , T>::operator= (const Array <N , T> & a)
+
+template <int N , typename T> Array <N , T> & Array <N , T>::operator = (const Array <N , T> & a)
 {
-    assert (m_size == a.getSize ()) ; // La taille du nouvel objet doit etre la meme que l'objet courant.
+    assert (m_size == a.A_getSize ()) ; // La taille du nouvel objet doit etre la meme que l'objet courant.
     int i = 0 ;
     while (i < m_size)
     {
-        m_data [i] = a.m_data [i] ; // Copier les donnees de a dans l'objet courant.
+        m_data [i] = a [i] ; // Copier les donnees de a dans l'objet courant.
         i ++ ;
     }
     return * this ;
+}
+
+template <int N , typename T> bool Array <N , T>::operator == (const Array <N , T> & a) const
+{
+    if (m_size != a.A_getSize ()) // Si la taille est differente c'est faux.
+    {
+        return false ;
+    }
+    int i = 0 ;
+    while (i < m_size) // Parcourir tous les elements du tableau.
+    {
+        // Comparer le tableau.
+        i ++ ;
+    }
+    return true ; // Aucune erreur rencontree.
+}
+
+template <int N , typename T> void Array <N , T>::swap (Array <N , T> & a)
+{
+    // Faire l'echange.
 }
 
 
