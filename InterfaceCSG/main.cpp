@@ -1,7 +1,6 @@
 #include <QApplication>
 #include "mainwindow.h"
 # include "vectorTemplate.h"
-
 # define DEBUG 1
 
 int main(int argc, char *argv[])
@@ -9,6 +8,8 @@ int main(int argc, char *argv[])
 //	QApplication a(argc, argv);
     // MainWindow w;
     // w.show();
+
+    /* Tests */
 
     if (DEBUG)
     {
@@ -22,9 +23,11 @@ int main(int argc, char *argv[])
         c [1] = 1 ;
         c.A_print () ;
 
-        b -= c ;
-        b.A_print () ;
+        Vector <2 , float> d = 100.0f / b ;
+        d.A_print () ;
     }
+
+    /********/
 
 //	return a.exec();
 }

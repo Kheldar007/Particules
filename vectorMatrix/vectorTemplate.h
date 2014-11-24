@@ -13,7 +13,6 @@
 
 /**
  * @class Vector Etend Array avec de nouvelles operations arithmetiques.
- * opérateurs avec un scalaire * / *= /=
  * Comment faire pour pouvoir écrire V = 0.5f * V ?
  */
 template <int N , typename T> class Vector : public Array <N , T>
@@ -32,6 +31,8 @@ template <int N , typename T> class Vector : public Array <N , T>
           * ~Vector Destructeur.
           */
         ~Vector () ;
+
+        /*********************** Operations entre les vecteurs. ***********************/
 
         /**
          * @brief  operator + Addition.
@@ -57,7 +58,45 @@ template <int N , typename T> class Vector : public Array <N , T>
          * @return La difference.
          */
         Vector <N , T> & operator -= (const Vector <N , T> & v) ;
+
+        /************************ Operations avec un scalaire. ************************/
+
+        /**
+         * @brief  operator * Multiplication.
+         * @param  scalar Un scalaire.
+         * @return Le resultat.
+         */
+        Vector <N , T> operator * (const T scalar) ;
+        /**
+         * @brief  operator / Division.
+         * @param  scalar Un scalaire.
+         * @return Le resultat.
+         */
+        Vector <N , T> operator / (const T scalar) ;
+        /**
+         * @brief  operator *= Multiplication.
+         * @param  scalar Un scalaire.
+         * @return Le resultat.
+         */
+        Vector <N , T> & operator *= (const T scalar) ;
+        /**
+         * @brief  operator /= Division.
+         * @param  scalar Un scalaire.
+         * @return Le resultat.
+         */
+        Vector <N , T> & operator /= (const T scalar) ;
 } ;
+
+/********************** Operateurs binaires non-membres. **********************/
+
+template <int N , typename T> Vector <N , T>
+    operator + (const T & t  , const Vector <N , T> & v) ;
+template <int N , typename T> Vector <N , T>
+    operator - (const T & t  , const Vector <N , T> & v) ;
+template <int N , typename T> Vector <N , T>
+    operator * (const T & t  , const Vector <N , T> & v) ;
+template <int N , typename T> Vector <N , T>
+    operator / (const T & t  , const Vector <N , T> & v) ;
 
 
 # include "vectorTemplate.hpp"
