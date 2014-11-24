@@ -6,14 +6,18 @@ CONFIG += staticlib
 #INCLUDEPATH +=
 
 #SOURCES += *.cpp
-SOURCES += vectCalc.cpp
+SOURCES += vectCalc.cpp \
+    vec2f.cpp \
+    vec3f.cpp
 
 #HEADERS += *.h *.hpp
 HEADERS += vecttempl.h vectCalc.h \
     arrayTemplate.h \
     arrayTemplate.hpp \
     vectorTemplate.h \
-    vectorTemplate.hpp
+    vectorTemplate.hpp \
+    vec2f.h \
+    vec3f.h
 
 DESTDIR = ../lib
 
