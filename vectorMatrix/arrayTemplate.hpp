@@ -15,6 +15,7 @@ template <int N , typename T> Array <N , T>::Array () :
     m_data(new T [N]) , m_size (N)
 {
     s_nb ++ ; // Creer un objet de plus.
+//    std::cout << "Array." << std::endl ;
 }
 
 template <int N , typename T> Array <N , T>::Array (const Array <N , T> & a)
@@ -29,6 +30,7 @@ template <int N , typename T> Array <N , T>::Array (const Array <N , T> & a)
         i ++ ;
     }
     s_nb ++ ; // Creer un objet de plus.
+//    std::cout << "Array par copie." << std::endl ;
 }
 
 template <int N , typename T> Array <N , T>::~Array ()
@@ -38,6 +40,7 @@ template <int N , typename T> Array <N , T>::~Array ()
         delete [] m_data ; // Supprimer le tableau de donnees.
     }
     s_nb -- ; // Supprimer un objet.
+//    std::cout << "Destructeur Array." << std::endl ;
 }
 
 template <int N , typename T> int Array <N , T>::A_getSize () const

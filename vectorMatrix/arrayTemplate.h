@@ -9,7 +9,7 @@
 
 
 /**
- * @class Array : template du nombre et du type d'elements.
+ * @class Array Template du nombre et du type d'elements.
  */
 template <int N , typename T> class Array
 {

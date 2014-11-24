@@ -8,8 +8,11 @@
 # define VECTOR_H
 
 
+# include "arrayTemplate.h"
+
+
 /**
- * @class Vector : etend Array avec de nouvelles operations arithmetiques.
+ * @class Vector Etend Array avec de nouvelles operations arithmetiques.
  * opérateurs entre vecteurs: + - += -=
  * opérateurs avec un scalaire * / *= /=
  * Comment faire pour pouvoir écrire V = 0.5f * V ?
@@ -30,7 +33,12 @@ template <int N , typename T> class Vector : public Array <N , T>
           * ~Vector Destructeur.
           */
         ~Vector () ;
+
+        Vector <N , T> operator + (const Vector <N , T> & v) ;
 } ;
 
 
 # include "vectorTemplate.hpp"
+
+
+# endif
