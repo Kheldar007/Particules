@@ -34,7 +34,13 @@ template <int N , typename T> class Vector : public Array <N , T>
           */
         ~Vector () ;
 
+        /**
+         * @brief  operator + Addition.
+         * @param  v Un autre Vector.
+         * @return La somme.
+         */
         Vector <N , T> operator + (const Vector <N , T> & v) ;
+        Vector <N , T> operator - (const Vector <N , T> & v) ;
 } ;
 
 

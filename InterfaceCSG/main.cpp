@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
         c [1] = 1 ;
         c.A_print () ;
 
-        Vector <2 , float> d = b + c ;
+        Vector <2 , float> d = b - c ;
         d.A_print () ;
     }
 
