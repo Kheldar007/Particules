@@ -13,7 +13,6 @@
 
 /**
  * @class Vector Etend Array avec de nouvelles operations arithmetiques.
- * Comment faire pour pouvoir écrire V = 0.5f * V ?
  */
 template <int N , typename T> class Vector : public Array <N , T>
 {
