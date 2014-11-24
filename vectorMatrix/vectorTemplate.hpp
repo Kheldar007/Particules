@@ -50,5 +50,29 @@ template <int N , typename T> Vector <N , T>
         return result ;
 }
 
+template <int N , typename T> Vector <N , T> &
+    Vector <N , T>::operator += (const Vector <N , T> & v)
+{
+    int i = 0 ;
+    while (i < N)
+    {
+        (* this) [i] += v [i] ; // Effectuer l'addition.
+        i ++ ;
+    }
+    return * this ; // Retourner le resultat de l'addition.
+}
+
+template <int N , typename T> Vector <N , T> &
+    Vector <N , T>::operator -= (const Vector <N , T> & v)
+{
+    int i = 0 ;
+    while (i < N)
+    {
+        (* this) [i] -= v [i] ; // Effectuer l'addition.
+        i ++ ;
+    }
+    return * this ; // Retourner le resultat de l'addition.
+}
+
 
 # endif
