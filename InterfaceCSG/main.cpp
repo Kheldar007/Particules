@@ -12,6 +12,8 @@ int main(int argc, char *argv[])
 
     if (DEBUG)
     {
+        Vec2f v1 = Vec2f (1 , 2) ;
+        Vec2f v2 = Vec2f (3 , 4) ;
     }
     else
     {

@@ -48,19 +48,6 @@ template <int N , typename T> int Array <N , T>::A_getSize () const
     return m_size ;
 }
 
-template <int N , typename T> T & Array <N , T>::operator [] (int i)
-{
-    return m_data [i] ; // Retourner la i-eme case.
-}
-
-template <int N , typename T> T const & Array <N , T>::operator [] (int i) const
-{
-    return m_data [i] ; // Retourner la i-eme case.
-}
-//template<typename T>
-//void VectTempl<T>::resize(int sz)
-//{
-//    assert(sz != 0);
 template <int N , typename T> void Array <N , T>::A_resize (int size)
 {
     assert (size != 0) ; // La taille ne doit pas etre nulle.
@@ -78,6 +65,16 @@ template <int N , typename T> void Array <N , T>::A_resize (int size)
     }
     m_data = newData ; // Copier les donnees dans le tableau.
     m_size = size ; // Conserver la nouvelle taille.
+}
+
+template <int N , typename T> T & Array <N , T>::operator [] (int i)
+{
+    return m_data [i] ; // Retourner la i-eme case.
+}
+
+template <int N , typename T> T const & Array <N , T>::operator [] (int i) const
+{
+    return m_data [i] ; // Retourner la i-eme case.
 }
 
 template <int N , typename T> Array <N , T> & Array <N , T>::operator = (const Array <N , T> & a)

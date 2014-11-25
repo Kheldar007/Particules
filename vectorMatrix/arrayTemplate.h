@@ -32,6 +32,7 @@ template <int N , typename T> class Array
          * @brief s_nb Nombre d'objets.
          */
         static int s_nb ;
+
     public :
         /**
          * @brief Array Constructeur.
@@ -46,11 +47,21 @@ template <int N , typename T> class Array
           * @brief ~Array Destructeur.
           */
         ~Array () ;
+
         /**
          * @brief  A_getSize Retourner la taille de l'Array.
          * @return m_size
          */
         int A_getSize () const ;
+
+        /**
+         * @brief A_resize Modifier la taille.
+         * @param size Nouvelle taille.
+         */
+        void A_resize (int size) ;
+
+        /******************************** Operateurs. *********************************/
+
         /**
          * @brief  operator [] Retourner une case de l'Array.
          * @param  i La i-eme case.
@@ -64,11 +75,6 @@ template <int N , typename T> class Array
          */
         T const & operator [] (int i) const ;
         /**
-         * @brief A_resize Modifier la taille.
-         * @param size Nouvelle taille.
-         */
-        void A_resize (int size) ;
-        /**
          * @brief  operator = Affectation.
          * @param  a Nouvel objet a affecter.
          * @return Copie de a.
@@ -80,6 +86,9 @@ template <int N , typename T> class Array
          * @return Vrai si les objets sont egaux.
          */
         bool operator == (const Array <N , T> & a) const ;
+
+        /******************************************************************************/
+
         /**
          * @brief A_swap Echanger deux Array.
          * @param a Un objet a echanger.
