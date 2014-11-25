@@ -1,6 +1,7 @@
 #include <QApplication>
 #include "mainwindow.h"
-# include "vectorTemplate.h"
+# include "vec2f.h"
+# include "vec3f.h"
 # define DEBUG 0
 
 int main(int argc, char *argv[])
@@ -11,18 +12,10 @@ int main(int argc, char *argv[])
 
     if (DEBUG)
     {
-        Vector <2 , float> b = Vector <2 , float> () ;
-        b [0] = 9 ;
-        b [1] = 5 ;
-        b.A_print () ;
-
-        Vector <2 , float> c = Vector <2 , float> () ;
-        c [0] = 4 ;
-        c [1] = 1 ;
-        c.A_print () ;
-
-        Vector <2 , float> d = 100.0f / b ;
-        d.A_print () ;
+    }
+    else
+    {
+        std::cout << "Yeepyyy !" << std::endl ;
     }
 
 //	return a.exec();

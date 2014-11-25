@@ -8,6 +8,12 @@
 # define ARRAY_H
 
 
+# include <algorithm>
+# include <cassert>
+# include <cstdio>
+# include <iostream>
+
+
 /**
  * @class Array Template du nombre et du type d'elements.
  */

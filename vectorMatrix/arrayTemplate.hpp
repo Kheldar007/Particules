@@ -57,7 +57,10 @@ template <int N , typename T> T const & Array <N , T>::operator [] (int i) const
 {
     return m_data [i] ; // Retourner la i-eme case.
 }
-
+//template<typename T>
+//void VectTempl<T>::resize(int sz)
+//{
+//    assert(sz != 0);
 template <int N , typename T> void Array <N , T>::A_resize (int size)
 {
     assert (size != 0) ; // La taille ne doit pas etre nulle.
