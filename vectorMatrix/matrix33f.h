@@ -8,17 +8,13 @@
 # define MATRIX33F_H
 
 
+# include <cmath>
+# include "vec2f.h"
 # include "vec3f.h"
 
 
 /**
  * @brief Matrix33f Classe des matrices de flottants de dimension 3x3.
-• inverse
-• set & apply translation
-• set & apply rotation
-• set & apply homothétie
-• multiplication par un vecteur (coordonnée homogène Vec3f )
-• appliquer la transformation à un vecteur (Vec2f)
  */
 class Matrix33f
 {
@@ -85,6 +81,45 @@ class Matrix33f
          * @return Matrice inverse.
          */
         Matrix33f M_reverse () const ;
+        /**
+         * @brief M_applyTranslate Appliquer un vecteur de translation.
+         * @param v Vecteur de translation.
+         */
+        void M_applyTranslate (const Vec2f v) ;
+        /**
+         * @brief M_setTranslate Generer une matrice de translation.
+         * @param v Vecteur de translation.
+         */
+        void M_setTranslate (const Vec2f v) ;
+        /**
+         * @brief M_applyRotate Effectuer une rotation.
+         * @param angle Angle de rotation.
+         */
+        void M_applyRotate (const float angle) ;
+        /**
+         * @brief M_setRotate Generer une matrice de rotation.
+         * @param angle Angle de rotation.
+         */
+        void M_setRotate (const float angle) ;
+        /**
+         * @brief M_applyHomothety Effectuer une homothetie.
+         * @param v Vecteur d'homothetie.
+         */
+        void M_applyHomothety (const Vec2f v) ;
+        /**
+         * @brief M_setHomothety Generer une matrice d'homothetie.
+         * @param v Vecteur d'homothetie.
+         */
+        void M_setHomothety (const Vec2f v) ;
+
+        /******************************** Operateurs. *********************************/
+
+        /**
+         * @brief  operator * Multiplication par un vecteur.
+         * @param  v Le vecteur.
+         * @return Le vecteur resultat.
+         */
+        Vec3f operator * (const Vec3f & v) const ;
 } ;
 
 
