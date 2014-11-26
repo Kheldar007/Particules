@@ -113,13 +113,13 @@ template <int N , typename T>
 template <int N , typename T> void Array <N , T>::A_print ()
 {
     int i = 0 ;
-    std::cout << "{ " ;
+    std::cout << "( " ;
     while (i < m_size) // Parcourir les elements du tableau.
     {
         std::cout << m_data [i] << " " ;
         i ++ ;
     }
-    std::cout << "}" << std::endl ;
+    std::cout << ")" << std::endl ;
 }
 
 

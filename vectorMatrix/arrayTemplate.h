@@ -34,6 +34,8 @@ template <int N , typename T> class Array
         static int s_nb ;
 
     public :
+
+        /******************************* Constructeurs. *******************************/
         /**
          * @brief Array Constructeur.
          */
@@ -43,16 +45,23 @@ template <int N , typename T> class Array
          * @param a Un Array.
          */
         Array (const Array <N , T> & a) ;
+
+        /******************************** Destructeur. ********************************/
+
         /**
           * @brief ~Array Destructeur.
           */
         ~Array () ;
+
+        /******************************** Accesseurs. *********************************/
 
         /**
          * @brief  A_getSize Retourner la taille de l'Array.
          * @return m_size
          */
         int A_getSize () const ;
+
+        /********************************* Mutateurs. *********************************/
 
         /**
          * @brief A_resize Modifier la taille.

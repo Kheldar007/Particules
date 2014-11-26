@@ -17,6 +17,9 @@
 template <int N , typename T> class Vector : public Array <N , T>
 {
     public :
+
+        /******************************* Constructeurs. *******************************/
+
         /**
          * @brief Vector Constructeur.
          */
@@ -26,6 +29,9 @@ template <int N , typename T> class Vector : public Array <N , T>
          * @param v Un Vector.
          */
         Vector (const Vector <N , T> & v) ;
+
+        /******************************** Destructeur. ********************************/
+
         /**
           * ~Vector Destructeur.
           */

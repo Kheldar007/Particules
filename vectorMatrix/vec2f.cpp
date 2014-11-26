@@ -17,7 +17,7 @@ Vec2f::Vec2f (const float & v1 , const float & v2)
     m_data [1] = v2 ;
 }
 
-float Vec2f::operator * (Vec2f const & v) const
+float Vec2f::operator * (const Vec2f & v) const
 {
     float result = 0 ; // Resultat nul par defaut.
 
@@ -30,7 +30,7 @@ float Vec2f::operator * (Vec2f const & v) const
     return result ; // Retourner le resultat.
 }
 
-Vec2f Vec2f::operator ^ (Vec2f const & v) const
+Vec2f Vec2f::operator ^ (const Vec2f & v) const
 {
     /************************ Calcul du produit vectoriel. ************************/
     float r1 = ((* this) [1] * v [0]) - ((* this) [0] * v [1]) ;

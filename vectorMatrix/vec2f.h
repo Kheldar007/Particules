@@ -20,6 +20,9 @@ typedef Vector <2 , float> VEC2F ; // Simplifier l'ecriture.
 class Vec2f : public VEC2F
 {
     public :
+
+        /******************************* Constructeurs. *******************************/
+
         /**
          * @brief Vec2f Constructeur vide.
          */
@@ -31,18 +34,20 @@ class Vec2f : public VEC2F
          */
         Vec2f (const float & v1 , const float & v2) ;
 
+        /******************************** Operateurs. *********************************/
+
         /**
          * @brief  operator * Produit scalaire.
          * @param  v Autre vecteur.
          * @return Flottant resultat du produit scalaire entre deux vecteurs.
          */
-        float operator * (Vec2f const & v) const ;
+        float operator * (const Vec2f & v) const ;
         /**
          * @brief  operator ^ Produit vectoriel.
          * @param  v Autre vecteur.
          * @return Vec2f resultat du produit vectoriel entre deux vecteurs.
          */
-        Vec2f operator ^ (Vec2f const & v) const ;
+        Vec2f operator ^ (const Vec2f & v) const ;
 } ;
 
 

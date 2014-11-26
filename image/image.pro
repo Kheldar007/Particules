@@ -1,13 +1,17 @@
+QT       -= gui
 
 TARGET = image
 TEMPLATE = lib
-CONFIG += staticlib
 
-INCLUDEPATH += ../vectorMatrix
+DEFINES += IMAGE_LIBRARY
 
-SOURCES += *.cpp
+SOURCES +=
 
-HEADERS += *.h *.hpp
+HEADERS += \
+    imageTemplate.h \
+    imageTemplate.hpp
 
-DESTDIR = ../lib
-
+unix {
+    target.path = /usr/lib
+    INSTALLS += target
+}

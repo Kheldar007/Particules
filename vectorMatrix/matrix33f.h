@@ -13,8 +13,6 @@
 
 /**
  * @brief Matrix33f Classe des matrices de flottants de dimension 3x3.
-• constructeur
-• accesseurs
 • inverse
 • set & apply translation
 • set & apply rotation
@@ -39,10 +37,54 @@ class Matrix33f
         Vec3f column3 ;
 
     public :
+
+        /******************************* Constructeurs. *******************************/
+
         /**
-         * @brief Matrix33f Constructeur vide.
+         * @brief Matrix33f Constructeur vide, matrice unitaire.
          */
         Matrix33f () ;
+        /**
+         * @brief Matrix33f Constructeur.
+         * @param l1c1 Case de la matrice.
+         * @param l1c2 Case de la matrice.
+         * @param l1c3 Case de la matrice.
+         * @param l2c1 Case de la matrice.
+         * @param l2c2 Case de la matrice.
+         * @param l2c3 Case de la matrice.
+         * @param l3c1 Case de la matrice.
+         * @param l3c2 Case de la matrice.
+         * @param l3c3 Case de la matrice.
+         */
+        Matrix33f (const float & l1c1 , const float & l2c1 , const float & l3c1 ,
+                   const float & l1c2 , const float & l2c2 , const float & l3c2 ,
+                   const float & l1c3 , const float & l2c3 , const float & l3c3) ;
+
+        /******************************** Accesseurs. *********************************/
+
+        /**
+         * @brief  M_getColumn1 Accesseur.
+         * @return Premiere colonne.
+         */
+        Vec3f M_getColumn1 () ;
+        /**
+         * @brief  M_getColumn2 Accesseur.
+         * @return Deuxieme colonne.
+         */
+        Vec3f M_getColumn2 () ;
+        /**
+         * @brief  M_getColumn2 Accesseur.
+         * @return Troisieme colonne.
+         */
+        Vec3f M_getColumn3 () ;
+
+        /******************************************************************************/
+
+        /**
+         * @brief  M_reverse Inverser la matrice.
+         * @return Matrice inverse.
+         */
+        Matrix33f M_reverse () const ;
 } ;
 
 

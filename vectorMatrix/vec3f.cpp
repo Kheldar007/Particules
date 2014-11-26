@@ -17,7 +17,7 @@ Vec3f::Vec3f (const float & v1 , const float & v2 , const float & v3)
     m_data [2] = v3 ;
 }
 
-float Vec3f::operator * (Vec3f const & v) const
+float Vec3f::operator * (const Vec3f & v) const
 {
     float result = 0 ; // Resultat nul par defaut.
 
@@ -31,7 +31,7 @@ float Vec3f::operator * (Vec3f const & v) const
     return result ; // Retourner le resultat.
 }
 
-Vec3f Vec3f::operator ^ (Vec3f const & v) const
+Vec3f Vec3f::operator ^ (const Vec3f & v) const
 {
     /************************ Calcul du produit vectoriel. ************************/
     float r1 = ((* this) [1] * v [2]) - ((* this) [2] * v [1]) ;
