@@ -5,11 +5,19 @@ TEMPLATE = lib
 
 DEFINES += IMAGE_LIBRARY
 
-SOURCES +=
+SOURCES += \
+    image2grey.cpp \
+    gradientsobel.cpp \
+    image2rgb.cpp
 
 HEADERS += \
     imageTemplate.h \
-    imageTemplate.hpp
+    imageTemplate.hpp \
+    image2dTemplate.h \
+    image2dTemplate.hpp \
+    image2grey.h \
+    gradientsobel.h \
+    image2rgb.h
 
 unix {
     target.path = /usr/lib
