@@ -16,7 +16,7 @@ Image2Grey::Image2Grey (const int x , const int y) : IMAGE2GREY (x , y)
     std::cout << "Image2Grey" << std::endl ;
 }
 
-void Image2Grey::loadFromPGM (const std::string & file)
+void Image2Grey::I2G_loadFromPGM (const std::string & file)
 {
     std::ifstream f (file.c_str () , std::ios::in) ; // Ouvrir le fichier.
     if (! f) // Erreur a l'ouverture.
@@ -53,7 +53,7 @@ void Image2Grey::loadFromPGM (const std::string & file)
             {
                 unsigned int pixel ;
                 f >> pixel ;
-                (* this).m_image [width + (height * (* this).m_dimension [0])] =
+                (* this).m_image [i + (j * (* this).m_dimension [0])] =
                     (pixel * 255) / maxValue ;
                 i ++ ;
             }
@@ -63,7 +63,7 @@ void Image2Grey::loadFromPGM (const std::string & file)
     }
 }
 
-void Image2Grey::saveToPGM (const std::string & file) const
+void Image2Grey::I2G_saveToPGM (const std::string & file) const
 {
     std::ofstream f (file.c_str() , std::ios::out | std::ios::trunc) ; // Fichier en sortie.
     if (! f) // Si le fichier ne s'est pas bien ouvert.
@@ -84,12 +84,30 @@ void Image2Grey::saveToPGM (const std::string & file) const
                 if (i)
                 {
                     f << " " ;
-                    f << std::to_string ((* this).m_image [i + (j * (* this).m_dimension [0])]) ;
                 }
+                f << " " << (unsigned) m_image [i] ;
                 i ++ ;
             }
             j ++ ;
         }
     }
     f.close () ;
+}
+
+Image2Grey Image2Grey::I2G_subsampling () const
+{
+    int width = (* this).m_dimension [0] / 2 ;
+    int height = (* this).m_dimension [1] / 2 ;
+    Image2Grey result (width , height) ; // Construire l'image resultat.
+    int i = 0 , j = 0 ;
+    int oldPixel1 , oldPixel2 , oldPixel3 , oldPixel4 ;
+    while (j < height)
+    {
+        i = 0 ;
+        while (i < width)
+        {
+//            oldPixel1 = (* this).m_image [(i * 2) + (j * (* this).m_dimension [0])] ;
+        }
+        j ++ ;
+    }
 }

@@ -1,7 +1,7 @@
  #include <QApplication>
 #include "mainwindow.h"
 # include "image2grey.h"
-# define DEBUG 0
+# define DEBUG 1
 
 int main(int argc, char *argv[])
 {
@@ -11,7 +11,8 @@ int main(int argc, char *argv[])
 
     if (DEBUG) // Tests.
     {
-       Image2Grey i (3 , 5) ;
+        Image2Grey i (800 , 600) ;
+        i.I2G_loadFromPGM("boat.pgm") ;
     }
     else
     {

@@ -18,7 +18,6 @@ typedef Image2D <unsigned char> IMAGE2GREY ; // Simplifier l'ecriture.
 
 /**
  * @brief Image2Grey Classe.
-fonctions de chargement et sauvegarde du format PGM (ascii)
 sous-échantillonnage (diviser la taille de l'image par 2, renvoie une nouvelle image)
 llissage (moyenne des pixels avec les (2n+1) 2 pixels voisins, renvoie une nouvelle image)
 seuillage par une valeur (0 en dessous 255 au dessus)
@@ -49,8 +48,17 @@ class Image2Grey : public IMAGE2GREY
          * @brief loadFromPGM Charger un fichier PGM.
          * @param file Le nom du fichier.
          */
-        void loadFromPGM (const std::string & file) ;
-        void saveToPGM (const std::string & file) const ;
+        void I2G_loadFromPGM (const std::string & file) ;
+        /**
+         * @brief saveToPGM Sauver l'image au format PGM.
+         * @param file Le nom du fichier.
+         */
+        void I2G_saveToPGM (const std::string & file) const ;
+        /**
+         * @brief  I2G_subsampling Diviser l'image par deux.
+         * @return Nouvelle image.
+         */
+        Image2Grey I2G_subsampling () const ;
 } ;
 
 
