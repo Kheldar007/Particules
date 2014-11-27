@@ -1,17 +1,17 @@
-QT       -= gui
 
 TARGET = image
 TEMPLATE = lib
+CONFIG += staticlib
 
-DEFINES += IMAGE_LIBRARY
+#INCLUDEPATH +=
 
-SOURCES += \
-    image2grey.cpp \
+#SOURCES += *.cpp
+SOURCES += image2grey.cpp \
     gradientsobel.cpp \
     image2rgb.cpp
 
-HEADERS += \
-    imageTemplate.h \
+#HEADERS += *.h *.hpp
+HEADERS += imageTemplate.h \
     imageTemplate.hpp \
     image2dTemplate.h \
     image2dTemplate.hpp \
@@ -19,7 +19,6 @@ HEADERS += \
     gradientsobel.h \
     image2rgb.h
 
-unix {
-    target.path = /usr/lib
-    INSTALLS += target
-}
+DESTDIR = ../lib
+
+QMAKE_CXXFLAGS += -Wall

@@ -8,12 +8,16 @@
 # define IMAGE2GREY_H
 
 
+# include <fstream>
+# include <string>
 # include "image2dTemplate.h"
+
+
+typedef Image2D <unsigned char> IMAGE2GREY ; // Simplifier l'ecriture.
 
 
 /**
  * @brief Image2Grey Classe.
-image 2D de unsigned char
 fonctions de chargement et sauvegarde du format PGM (ascii)
 sous-échantillonnage (diviser la taille de l'image par 2, renvoie une nouvelle image)
 llissage (moyenne des pixels avec les (2n+1) 2 pixels voisins, renvoie une nouvelle image)
@@ -22,10 +26,31 @@ seuillage par une valeur (0 en dessous 255 au dessus)
 Qu'impliquerait d'écrire le seuillage dans Image2D<T> ?
 Comment contourner le problème ?
  */
-class Image2Grey
+class Image2Grey : public IMAGE2GREY
 {
     public :
+
+        /******************************* Constructeurs. *******************************/
+
+        /**
+         * @brief Image2Grey Constructeur vide.
+         */
         Image2Grey () ;
+        /**
+         * @brief Image2Grey Constructeur.
+         * @param x Largeur de l'image.
+         * @param y Hauteur de l'image.
+         */
+        Image2Grey (const int x , const int y) ;
+
+        /******************************************************************************/
+
+        /**
+         * @brief loadFromPGM Charger un fichier PGM.
+         * @param file Le nom du fichier.
+         */
+        void loadFromPGM (const std::string & file) ;
+        void saveToPGM (const std::string & file) const ;
 } ;
 
 

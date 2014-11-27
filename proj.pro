@@ -1,10 +1,8 @@
 TEMPLATE = subdirs
+SUBDIRS = vectorMatrix
 
-SUBDIRS = vectorMatrix \
-    image
-
-#CONFIG += ordered
-#SUBDIRS +=
+CONFIG += ordered
+SUBDIRS += image
 
 #CONFIG += ordered
 #SUBDIRS += csg

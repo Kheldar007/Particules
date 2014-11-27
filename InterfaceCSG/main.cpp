@@ -1,6 +1,6 @@
  #include <QApplication>
 #include "mainwindow.h"
-# include "image2dTemplate.h"
+# include "image2grey.h"
 # define DEBUG 0
 
 int main(int argc, char *argv[])
@@ -11,8 +11,7 @@ int main(int argc, char *argv[])
 
     if (DEBUG) // Tests.
     {
-        Image2D <int> image (2 , 3) ;
-        int * array = image.I2D_getImage();
+       Image2Grey i (3 , 5) ;
     }
     else
     {
