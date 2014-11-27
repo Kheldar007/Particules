@@ -48,6 +48,24 @@ template <int D , typename T> T * Image <D , T>::I_getImage () const
 }
 
 template <int D , typename T>
+    void Image <D , T>::I_setDimension (const Array <D , int> dimension)
+{
+    m_dimension = dimension ;
+}
+
+template <int D , typename T>
+    void Image <D , T>::I_setDimension1 (const int dimension1)
+{
+    m_dimension [0] = dimension1 ;
+}
+
+template <int D , typename T>
+    void Image <D , T>::I_setDimension2 (const int dimension2)
+{
+    m_dimension [1] = dimension2 ;
+}
+
+template <int D , typename T>
     void I_swap (Image <D , T> & image1 , Image <D , T> & image2)
 {
     std::swap (image1 , image2) ; // Echanger les pointeurs.

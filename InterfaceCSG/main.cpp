@@ -1,6 +1,6 @@
  #include <QApplication>
 #include "mainwindow.h"
-# include "imageTemplate.h"
+# include "image2dTemplate.h"
 # define DEBUG 0
 
 int main(int argc, char *argv[])
@@ -9,8 +9,10 @@ int main(int argc, char *argv[])
     // MainWindow w;
     // w.show();
 
-    if (DEBUG)
+    if (DEBUG) // Tests.
     {
+        Image2D <int> image (2 , 3) ;
+        int * array = image.I2D_getImage();
     }
     else
     {
