@@ -13,8 +13,6 @@
 
 /**
  * @brief Image2D Template.
-pour définir des contructeurs et accesseurs plus
-pratique (x,y)
  */
 template <typename T> class Image2D : public Image <2 , T>
 {
