@@ -51,9 +51,8 @@ class Image2Grey : public IMAGE2GREY
         void I2G_loadFromPGM (const std::string & file) ;
         /**
          * @brief saveToPGM Sauver l'image au format PGM.
-         * @param file Le nom du fichier.
          */
-        void I2G_saveToPGM (const std::string & file) const ;
+        void I2G_saveToPGM (const std::string &file) const ;
         /**
          * @brief  I2G_subsampling Diviser l'image par deux.
          * @return Nouvelle image.

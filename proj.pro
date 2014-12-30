@@ -4,8 +4,8 @@ SUBDIRS = vectorMatrix
 CONFIG += ordered
 SUBDIRS += image
 
-#CONFIG += ordered
-#SUBDIRS += csg
+CONFIG += ordered
+SUBDIRS += csg
 
 #CONFIG += ordered
 #SUBDIRS += particle

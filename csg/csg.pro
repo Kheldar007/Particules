@@ -7,9 +7,11 @@ QMAKE_CXXFLAGS += -Wall
 
 INCLUDEPATH += ../vectorMatrix ../image
 
-SOURCES += *.cpp
+SOURCES += *.cpp \
+    boundingbox.cpp
 
-HEADERS += *.h
+HEADERS += *.h \
+    boundingbox.h
 
 DESTDIR = ../lib
 

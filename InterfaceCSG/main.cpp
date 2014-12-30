@@ -1,4 +1,4 @@
- #include <QApplication>
+#include <QApplication>
 #include "mainwindow.h"
 # include "image2grey.h"
 # define DEBUG 0
@@ -11,10 +11,13 @@ int main(int argc, char *argv[])
 
     if (DEBUG) // Tests.
     {
+        Image2Grey i ;
+        i.I2G_loadFromPGM ("test.pgm");
+        i.I2G_saveToPGM ("out.pgm") ;
     }
     else
     {
-        std::cout << "The game is on !" << std::endl ;
+        std::cout << "\nThe game is on !\n" << std::endl ;
     }
 
 //	return a.exec();

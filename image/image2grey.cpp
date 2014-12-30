@@ -5,7 +5,8 @@
 
 
 # include "image2grey.h"
-
+#include <iostream>
+#include <fstream>
 
 Image2Grey::Image2Grey () : IMAGE2GREY ()
 {
@@ -18,6 +19,83 @@ Image2Grey::Image2Grey (const int x , const int y) : IMAGE2GREY (x , y)
 
 void Image2Grey::I2G_loadFromPGM (const std::string & file)
 {
+//    int widthPgm , heightPgm , maxPgm ;
+//    std::ifstream f (file.c_str () , std::ios::in) ; // Ouvrir le fichier.
+//    char char1 , char2 , c ;
+//    std::string c1 = "" , c2 = "" , c3 = "" , cPix = "" ;
+//    int pixel ;
+//    f.get (char1) ;
+//    f.get (char2) ;
+//    f.get (c) ;
+
+//    // Magic number.
+//    while (c == ' ' || c == '\n')
+//    {
+//        f.get (c) ;
+//    }
+//    while (c != ' ' && c != '\n')
+//    {
+//        c1 += c ;
+//        f.get (c) ;
+//    }
+
+//    // Longueur.
+//    widthPgm = atoi (c1.c_str ()) ;
+//    this -> m_dimension [0] = (widthPgm) ;
+//    while (c == ' ' || c == '\n')
+//    {
+//        f.get (c) ;
+//    }
+
+//    // Hauteur.
+//    while (c != ' ' && c != '\n')
+//    {
+//        c2 += c ;
+//        f.get (c) ;
+//    }
+//    heightPgm = atoi (c2.c_str ()) ;
+//    this -> m_dimension [1] = (heightPgm) ;
+//    while (c == ' ' || c == '\n')
+//    {
+//        f.get (c) ;
+//    }
+
+//    // Valeur max.
+//    while (c != ' ' && c != '\n')
+//    {
+//        c3 += c ;
+//        f.get (c) ;
+//    }
+//    while (c == ' ' || c == '\n')
+//    {
+//        f.get (c) ;
+//    }
+//    maxPgm = atoi (c3.c_str ()) ;
+//    if (maxPgm > 255)
+//    {
+//        exit (-1) ;
+//    }
+
+//    // Parcourir les pixels.
+//    int i = 0 ;
+//    while (i < this -> m_dimension [0] * this -> m_dimension [1])
+//    {
+//        while (c == ' ' || c == '\n' && (! f.eof ()))
+//        {
+//            f.get (c) ;
+//        }
+//        while (c != ' ' && c != '\n' && (! f.eof ()))
+//        {
+//            cPix += c ;
+//            f.get (c) ;
+//        }
+//        pixel = atoi (cPix.c_str ()) ;
+//        this -> m_image [i] = pixel ;
+//        cPix = "" ;
+//        i ++ ;
+//    }
+
+
     std::ifstream f (file.c_str () , std::ios::in) ; // Ouvrir le fichier.
     if (! f) // Erreur a l'ouverture.
     {
@@ -65,6 +143,27 @@ void Image2Grey::I2G_loadFromPGM (const std::string & file)
 
 void Image2Grey::I2G_saveToPGM (const std::string & file) const
 {
+//    std::ofstream out ;
+//    int cpt = 0 ;
+//    out.open ("out.pgm") ;
+//    out << "P2\n" ;
+//    out << this -> m_dimension [0] << " " << this -> m_dimension [1] << "\n" ;
+//    out << 255 << "\n" ;
+//    int i = 0 , j = 0 ;
+//    while (i < this -> m_dimension [1])
+//    {
+//        j = 0 ;
+//        while (j < this -> m_dimension [0])
+//        {
+//            out << (int) this -> m_image [cpt] << "  " ;
+//            cpt ++ ;
+//            j ++ ;
+//        }
+//        out << "\n" ;
+//        i ++ ;
+//    }
+//    out.close () ;
+
     std::ofstream f (file.c_str() , std::ios::out | std::ios::trunc) ; // Fichier en sortie.
     if (! f) // Si le fichier ne s'est pas bien ouvert.
     {
@@ -106,7 +205,7 @@ Image2Grey Image2Grey::I2G_subsampling () const
         i = 0 ;
         while (i < width)
         {
-//            oldPixel1 = (* this).m_image [(i * 2) + (j * (* this).m_dimension [0])] ;
+            oldPixel1 = (* this).m_image [(i * 2) + (j * (* this).m_dimension [0])] ;
         }
         j ++ ;
     }
