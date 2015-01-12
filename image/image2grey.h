@@ -18,9 +18,6 @@ typedef Image2D <unsigned char> IMAGE2GREY ; // Simplifier l'ecriture.
 
 /**
  * @brief Image2Grey Classe.
-
-
-
  */
 class Image2Grey : public IMAGE2GREY
 {
