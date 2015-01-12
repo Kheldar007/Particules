@@ -7,7 +7,8 @@
 # ifndef IMAGE2RGB_H
 # define IMAGE2RGB_H
 
-
+# include <fstream>
+# include <string>
 # include "image2dTemplate.h"
 # include "../vectorMatrix/vec3f.h"
 
@@ -40,6 +41,17 @@ class Image2RGB : public IMAGE2RGB
          * @brief Image2RGB Constructeur vide.
          */
         Image2RGB () ;
+
+        /**
+          * @brief I2RGB_loadFromPGM Ouvrir une image pgm.
+          * @param f Nom du fichier.
+          */
+        void I2RGB_loadFromPGM (const std::string & file) const ;
+        /**
+          * @brief I2RGB_saveToPGM Enregistrer une image pgm.
+          * @param f Nom du fichier.
+          */
+        void I2RGB_saveToPGM (const std::string & file) ;
 } ;
 
 

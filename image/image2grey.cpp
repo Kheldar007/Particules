@@ -18,7 +18,7 @@ Image2Grey::Image2Grey (const int x , const int y) : IMAGE2GREY (x , y)
 void Image2Grey::I2G_loadFromPGM (const std::string & file)
 {
    int widthPgm , heightPgm , maxPgm ;
-   std::ifstream * f = new std::ifstream ("test.pgm" , std::ifstream::in) ; // Ouvrir le fichier.
+   std::ifstream * f = new std::ifstream ("test.pgm" /*file.c_str ()*/ , std::ifstream::in) ; // Ouvrir le fichier.
 //   f -> open ("test.pgm" , std::ifstream::in) ;
 
    if (f -> is_open()) // Veririer s'il y a une erreur avec le fichier.
@@ -106,7 +106,7 @@ void Image2Grey::I2G_saveToPGM (const std::string & file) const
 {
    std::ofstream out ;
    int cpt = 0 ;
-   out.open ("out.pgm" , std::ofstream::out) ;
+   out.open ("out.pgm" /*file.c_str ()*/ , std::ofstream::out) ;
    if (out.is_open ())
    {
        out << "P2\n" ;
