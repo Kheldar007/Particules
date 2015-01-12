@@ -18,12 +18,9 @@ typedef Image2D <unsigned char> IMAGE2GREY ; // Simplifier l'ecriture.
 
 /**
  * @brief Image2Grey Classe.
-sous-échantillonnage (diviser la taille de l'image par 2, renvoie une nouvelle image)
-llissage (moyenne des pixels avec les (2n+1) 2 pixels voisins, renvoie une nouvelle image)
-seuillage par une valeur (0 en dessous 255 au dessus)
 
-Qu'impliquerait d'écrire le seuillage dans Image2D<T> ?
-Comment contourner le problème ?
+
+
  */
 class Image2Grey : public IMAGE2GREY
 {
@@ -52,12 +49,24 @@ class Image2Grey : public IMAGE2GREY
         /**
          * @brief saveToPGM Sauver l'image au format PGM.
          */
-        void I2G_saveToPGM (const std::string &file) const ;
+        void I2G_saveToPGM (const std::string & file) const ;
         /**
          * @brief  I2G_subsampling Diviser l'image par deux.
          * @return Nouvelle image.
          */
         Image2Grey I2G_subsampling () const ;
+        /**
+          * @brief  I2G_smoothing Moyenne des pixels avec les (2n+1) 2 pixels voisins.
+          * @param  n Nombre de pixels a utiliser pour faire la moyenne.
+          * @return Image lissee.
+          */
+        Image2Grey I2G_smoothing (int n) const ;
+        /**
+          * @brief  I2G_thresholding Seuillage par une valeur (0 en dessous 255 au dessus).
+          * @param  threshold Le seuil.
+          * @return Image seuillee.
+          */
+        Image2Grey I2G_thresholding (int threshold) const ;
 } ;
 
 
