@@ -159,23 +159,21 @@ Image2Grey Image2Grey::I2G_smoothing (int n) const
     Image2Grey result (this -> m_dimension [0] , this -> m_dimension [0]) ; // Construire l'image resultat.
     int k = 0 , i = 0 , j = 0 ;
     int average , average_t ;
-    while (k < this -> m_dimension [0] * this -> m_dimension [1]) // Parcourir les pixels de l'image.
+    while (k < this -> m_dimension [0] * this -> m_dimension [1])
     {
-        average = 0 ; // Pour la moyenne.
         average = m_image [k] ;
-
+        average_t = 0 ;
         i = k - n ;
         while (i < k + n)
         {
             j = k - n ;
             while (j < k + n)
             {
-                if ((j > 0) && (j == k % (i * this -> m_dimension [1])) && (i > 0) &&
-                    (i == k % (j * this -> m_dimension [0])) && (i != k))
+//                if ((j > 0) && (j == k % (i * this -> m_dimension [1])) && (i > 0) &&
+//                    (i == k % (j * this -> m_dimension [0])) && (i != k))
                 {
-                        average += (int) m_image [j * this -> m_dimension [0] + i] ; // Pour construire la moyenne.
-
-                        average_t ++ ;
+                    average += (int) m_image [j * this -> m_dimension [0] + i] ;
+                    average_t ++ ;
                 }
 
                 j ++ ;
@@ -183,7 +181,8 @@ Image2Grey Image2Grey::I2G_smoothing (int n) const
 
             i ++ ;
         }
-        result.m_image [i] = average / average_t ; // Trouver la couleur resultante.
+
+        result.m_image [k] = (unsigned char) (average / average_t) ;
 
         k ++ ;
     }

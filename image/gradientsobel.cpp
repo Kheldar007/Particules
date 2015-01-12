@@ -7,6 +7,6 @@
 # include "gradientsobel.h"
 
 
-GradientSobel::GradientSobel ()
+GradientSobel::GradientSobel (Image2Grey &image)
 {
 }

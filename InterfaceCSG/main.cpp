@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     if (DEBUG) // Tests.
     {
         Image2Grey i (10 , 10) ;
-        i.I2G_subsampling () ;
+        i.I2G_smoothing(3) ;
 //        i.I2G_loadFromPGM ("test.pgm");
 //        i.I2G_saveToPGM ("out.pgm") ;
 

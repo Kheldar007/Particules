@@ -4,6 +4,10 @@ M1 ISI
 Janvier 2015
 
 
+TODO :
+- Image2Grey::I2G_smoothing
+
+
 Comment faire pour pouvoir écrire V = 0.5f * V ?
 -> En mettant des operateurs binaires non-membres de la classe.
 
