@@ -6,6 +6,7 @@ Janvier 2015
 
 TODO :
 - Image2Grey::I2G_smoothing
+- GradientSobel::GradientSobel
 
 
 Comment faire pour pouvoir écrire V = 0.5f * V ?

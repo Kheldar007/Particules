@@ -15,13 +15,15 @@
 
 /**
  * @brief GradientSobel Classe.
-Ã  partir d'une image Ã  niveau de gris calcul une image
-de Vec2f
  */
 class GradientSobel : public Image2D <Vec2f>
 {
     public :
 
+        /**
+          * @brief GradientSobel Filtre sobel 5x5.
+          * @param image Une image de niveau de gris.
+          */
         GradientSobel (Image2Grey & image) ;
 } ;
 
