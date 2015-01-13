@@ -15,9 +15,7 @@ BoundingBox::BoundingBox ()
     m_yMax = 0 ;
 }
 
-BoundingBox::~BoundingBox ()
-{
-}
+BoundingBox::~BoundingBox () {}
 
 float BoundingBox::BB_getXMin ()
 {

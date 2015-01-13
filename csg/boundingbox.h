@@ -41,6 +41,9 @@ class BoundingBox
           * @brief BoundingBox Constructeur vide.
           */
         BoundingBox () ;
+        /**
+          * @brief ~BoundingBox Destructeur.
+          */
         ~BoundingBox () ;
 
         /******************************** Accesseurs. *********************************/
