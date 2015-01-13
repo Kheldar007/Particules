@@ -1,6 +1,6 @@
 #include <QApplication>
 #include "mainwindow.h"
-# include "image2grey.h"
+# include "boundingbox.h"
 # define DEBUG 1
 
 int main(int argc, char *argv[])
@@ -11,16 +11,16 @@ int main(int argc, char *argv[])
 
     if (DEBUG) // Tests.
     {
-        Image2Grey i (10 , 10) ;
-        i.I2G_smoothing(3) ;
-//        i.I2G_loadFromPGM ("test.pgm");
-//        i.I2G_saveToPGM ("out.pgm") ;
-
-        std::cerr << "\nDebug.\n" << std::endl ;
+        BoundingBox bb ;
+        if (bb.BB_isEmpty())
+        {
+            std::cerr << "test" << std::endl ;
+        }
+        std::cout << "\nDebug.\n" << std::endl ;
     }
     else
     {
-        std::cerr << "\nThe game is on !\n" << std::endl ;
+        std::cout << "\nThe game is on !\n" << std::endl ;
     }
 
 //    return a.exec();
