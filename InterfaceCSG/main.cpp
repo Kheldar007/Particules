@@ -1,7 +1,7 @@
 #include <QApplication>
 #include "mainwindow.h"
-# include "boundingbox.h"
-# define DEBUG 1
+# include "../csg/boundingbox.h"
+# define DEBUG 0
 
 int main(int argc, char *argv[])
 {
@@ -11,11 +11,6 @@ int main(int argc, char *argv[])
 
     if (DEBUG) // Tests.
     {
-        BoundingBox bb ;
-        if (bb.BB_isEmpty())
-        {
-            std::cerr << "test" << std::endl ;
-        }
         std::cout << "\nDebug.\n" << std::endl ;
     }
     else

@@ -15,6 +15,10 @@ BoundingBox::BoundingBox ()
     m_yMax = 0 ;
 }
 
+BoundingBox::~BoundingBox ()
+{
+}
+
 float BoundingBox::BB_getXMin ()
 {
     return m_xMin ;
@@ -169,4 +173,19 @@ bool BoundingBox::BB_isEmpty ()
 Vec2f * BoundingBox::BB_center ()
 {
     return new Vec2f ((m_xMax - m_xMin) / 2 , (m_yMax - m_yMin) / 2) ;
+}
+
+bool BoundingBox::BB_isInside (const Vec2f & vector)
+{
+    if ((vector [0] >= m_xMin) && (vector [0] <= m_xMax) &&
+        (vector [1] >= m_yMin) && (vector [1] <= m_yMax))
+    {
+        return true ;
+    }
+    return false ;
+}
+
+void BoundingBox::BB_addVector (Vec2f * vector)
+{
+    // TODO.
 }

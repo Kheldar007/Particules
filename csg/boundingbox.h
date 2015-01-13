@@ -13,12 +13,6 @@
 
 /**
   * @class BoundingBox Boite englobante.
-
- centre
- teste si un point est dans la boite
- ajout d'un point P dans la boite
-
-
   */
 class BoundingBox
 {
@@ -47,6 +41,7 @@ class BoundingBox
           * @brief BoundingBox Constructeur vide.
           */
         BoundingBox () ;
+        ~BoundingBox () ;
 
         /******************************** Accesseurs. *********************************/
 
@@ -127,6 +122,17 @@ class BoundingBox
          * @return Centre de la boite.
          */
         Vec2f * BB_center () ;
+        /**
+         * @brief  BB_isInside Tester si un point est situe a l'interieur de la boite.
+         * @param  vector Le point.
+         * @return Vrai s'il est dedans.
+         */
+        bool BB_isInside (const Vec2f & vector) ;
+        /**
+         * @brief BB_addVector Ajouter un point a la boite.
+         * @param vector Le point a ajouter.
+         */
+        void BB_addVector (Vec2f * vector) ;
 } ;
 
 
