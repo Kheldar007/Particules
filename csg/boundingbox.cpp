@@ -185,7 +185,22 @@ bool BoundingBox::BB_isInside (const Vec2f & vector)
     return false ;
 }
 
-void BoundingBox::BB_addVector (Vec2f * vector)
+void BoundingBox::BB_addVector (const Vec2f & vector)
 {
-    // TODO.
+    if (vector [0] < m_xMin)
+    {
+        m_xMin = vector [0] ;
+    }
+    else if (vector [0] > m_xMax)
+    {
+        m_xMax = vector [0] ;
+    }
+    if (vector [1] < m_yMin)
+    {
+        m_yMin = vector [1] ;
+    }
+    else if (vector [1] > m_yMax)
+    {
+        m_yMax = vector [1] ;
+    }
 }

@@ -132,7 +132,7 @@ class BoundingBox
          * @brief BB_addVector Ajouter un point a la boite.
          * @param vector Le point a ajouter.
          */
-        void BB_addVector (Vec2f * vector) ;
+        void BB_addVector (const Vec2f & vector) ;
 } ;
 
 
