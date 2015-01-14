@@ -16,6 +16,20 @@
 
 
 /**
+ * @brief Sort Foncteur pour le tri.
+ */
+class Sort
+{
+    public :
+
+        bool operator () (CsgNode * node1 , CsgNode * node2)
+        {
+            return (node1 -> CN_getIdentifier () < node2 -> CN_getIdentifier ()) ;
+        }
+} ;
+
+
+/**
  * @brief CsgTree Arbre.
  */
 class CsgTree
@@ -25,11 +39,11 @@ class CsgTree
         /**
          * @brief roots Les racines.
          */
-        std::set <CsgNode *> m_roots ;
+        std::set <CsgNode * , Sort> m_roots ;
         /**
          * @brief leaves Les feuilles.
          */
-        std::set <CsgNode *> m_leaves ;
+        std::set <CsgNode * , Sort> m_leaves ;
         /**
          * @brief m_map Une map permettant de retrouver un nœud (son adresse) a partir de son id (un entier).
          */
