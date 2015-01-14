@@ -11,7 +11,6 @@ TODO :
 - CsgTree::CT_save
 - CsgTree::CT_draw
 - CsgTree::CT_deleteNode
-- CsgTree::CT_swapSons
 
 
 Comment faire pour pouvoir écrire V = 0.5f * V ?

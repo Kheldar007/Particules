@@ -83,6 +83,9 @@ void CsgTree::CT_deleteNode (int id)
     }
 }
 
-void CsgTree::CT_swapSons ()
+void CsgTree::CT_swapSons (CsgNode * node)
 {
+    CsgNode * node_t = node -> CN_getLeftChild () ;
+    node -> CN_setLeftChild (node -> CN_getRightChild ()) ;
+    node -> CN_setRightChild (node_t) ;
 }

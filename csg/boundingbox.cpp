@@ -149,14 +149,7 @@ BoundingBox * BoundingBox::operator ^ (BoundingBox * bb)
 
 BoundingBox * BoundingBox::operator - (BoundingBox * bb)
 {
-    BoundingBox * result = new BoundingBox () ;
-
-    result -> BB_setXMin (m_xMin - bb -> BB_getXMin ()) ;
-    result -> BB_setXMax (m_xMax - bb -> BB_getXMax ()) ;
-    result -> BB_setYMin (m_yMin - bb -> BB_getYMin ()) ;
-    result -> BB_setYMin (m_yMax - bb -> BB_getYMax ()) ;
-
-    return result ;
+    return this ;
 }
 
 bool BoundingBox::BB_isEmpty ()

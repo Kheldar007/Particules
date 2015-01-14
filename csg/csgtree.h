@@ -95,8 +95,9 @@ class CsgTree
         void CT_deleteNode (int id) ;
         /**
          * @brief CT_swapSons Swap fils droit/fils gauche.
+         * @param node Le noeud.
          */
-        void CT_swapSons () ;
+        void CT_swapSons (CsgNode * node) ;
 } ;
 
 
