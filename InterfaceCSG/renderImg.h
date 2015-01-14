@@ -10,7 +10,7 @@
 #include "vectCalc.h"
 
 //fprward declaration
-class BoundingBox;
+//class BoundingBox;
 
 class RenderImg : public QGLWidget
 {

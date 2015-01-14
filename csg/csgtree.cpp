@@ -21,18 +21,6 @@ CsgTree::~CsgTree ()
 
 CsgNode * CsgTree::CT_map (int id)
 {
-//    if (m_leaves.size () > 0) // S'il y a quelque chose dans l'arbre.
-//    {
-//        int i = 0 ;
-//        Map m ; // Le foncteur.
-//        m.id = id ;
-//        while (i < m_leaves.size ()) // Parcourir les feuilles.
-//        {
-//            std::for_each (m_leaves.begin () , m_leaves.end () , m) ; // Chercher l'object contenant l'identifiant.
-
-//            i ++ ;
-//        }
-//    }
     std::map <int , CsgNode *>::iterator i = m_map.find (id) ; // Trouver le noeud grace a son indice.
     return i -> second ;
 }
@@ -47,7 +35,7 @@ void CsgTree::CT_save (std::string format)
 
 void CsgTree::CT_draw (const Image2Grey & image)
 {
-    std::vector <CsgNode *>::iterator it = m_roots.begin() ;
+    std::set <CsgNode *>::iterator it = m_roots.begin() ;
     while (it != m_roots.end ())
     {
         int i = (* it) -> CN_getBoundingBox ().BB_getXMin () , j = 0 ;
@@ -58,14 +46,13 @@ void CsgTree::CT_draw (const Image2Grey & image)
             {
                 if ((i >= 0) && (i < image.I_getDimension () [0]) && (j >= 0) && (j < image.I2D_getDimension () [0]))
                 {
-//                    if((*it1)->intersect(x, y))
+//                    if ((* it) -> intersect (x , y))
 //                    {
-//                        p_image.setPixel(y, x, 255);
-//                        //std::cout << "YES" << x << y << std::endl;
-//                    } else
+//                        image.I2D_setPixel (j , i , 1) ;
+//                    }
+//                    else
 //                    {
-//                        p_image.setPixel(y, x, 0);
-//                        //std::cout << "NO" << x << y << std::endl;
+//                        image.I2D_setPixel (j , i , 0) ;
 //                    }
                 }
 
@@ -79,7 +66,23 @@ void CsgTree::CT_draw (const Image2Grey & image)
     }
 }
 
-CsgNode * CsgTree::CT_clone (CsgNode * node)
+CsgNode * CsgTree::CT_clone (int id)
 {
-    return new CsgNode (node -> CN_getIdentifier () , node -> CN_getParent ()) ;
+    return new CsgNode (id , CT_map (id) -> CN_getParent ()) ;
+}
+
+void CsgTree::CT_deleteNode (int id)
+{
+    CsgNode * node = CT_map (id) ; // Rechercher le noeud.
+    assert (node != NULL) ; // Si le noeud existe.
+    std::set <CsgNode *>::iterator it = m_roots.find (node) ;
+//    if (it != m_roots.end ()) // Le noeud correspond a une racine.
+    {
+        m_roots.erase (node) ; // Supprimer l'element.
+        delete node ;
+    }
+}
+
+void CsgTree::CT_swapSons ()
+{
 }

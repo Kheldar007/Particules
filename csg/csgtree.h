@@ -12,15 +12,11 @@
 # include "csgnode.h"
 # include "image2grey.h"
 # include <map>
-# include <vector>
+# include <set>
 
 
 /**
  * @brief CsgTree Arbre.
-
-Enlever un nœud et remettre ces 2 fils dans les racines
-Swap fils droit/ fils gauche
-
  */
 class CsgTree
 {
@@ -29,11 +25,11 @@ class CsgTree
         /**
          * @brief roots Les racines.
          */
-        std::vector <CsgNode *> m_roots ;
+        std::set <CsgNode *> m_roots ;
         /**
          * @brief leaves Les feuilles.
          */
-        std::vector <CsgNode *> m_leaves ;
+        std::set <CsgNode *> m_leaves ;
         /**
          * @brief m_map Une map permettant de retrouver un nœud (son adresse) a partir de son id (un entier).
          */
@@ -77,29 +73,16 @@ class CsgTree
          * @param  node Le noeud a cloner
          * @return Copie de node.
          */
-        CsgNode * CT_clone (CsgNode * node) ;
-} ;
-
-class Map
-{
-    public :
-
-        int id ;
-
-        CsgNode * operator () (CsgNode * node)
-        {
-            CsgNode * node_t = node ; // Pour remonter l'arbre.
-            while (node_t != NULL) // Examiner chaque noeud de l'arbre.
-            {
-                if (node_t -> CN_getIdentifier () == id) // On a trouve le noeud.
-                {
-                    return node_t ; // Le noeud est trouve.
-                }
-
-                node_t = node_t -> CN_getParent () ; // Remonter dans l'arbre.
-            }
-            return NULL ;
-        } ;
+        CsgNode * CT_clone (int id) ;
+        /**
+         * @brief CT_deleteNode Enlever un noeud et remettre ses deux fils dans les racines.
+         * @param id
+         */
+        void CT_deleteNode (int id) ;
+        /**
+         * @brief CT_swapSons Swap fils droit/fils gauche.
+         */
+        void CT_swapSons () ;
 } ;
 
 
