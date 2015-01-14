@@ -24,76 +24,76 @@ void Image2Grey::I2G_loadFromPGM (const std::string & file)
    if (f -> is_open()) // Verifier s'il y a une erreur avec le fichier.
    {
        std::cout << "Yahoo" << std::endl ;
-	   char char1 , char2 , c ;
-	   std::string c1 = "" , c2 = "" , c3 = "" , cPix = "" ;
-	   int pixel ;
+       char char1 , char2 , c ;
+       std::string c1 = "" , c2 = "" , c3 = "" , cPix = "" ;
+       int pixel ;
        f -> get (char1) ;
        f -> get (char2) ;
        f -> get (c) ;
-	
-	   // Magic number.
-	   while (c == ' ' || c == '\n')
+
+       // Magic number.
+       while (c == ' ' || c == '\n')
        {
            f -> get (c) ;
-	   }
-	   while (c != ' ' && c != '\n')
-	   {
-	       c1 += c ;
+       }
+       while (c != ' ' && c != '\n')
+       {
+           c1 += c ;
            f -> get (c) ;
        }
 
-	   widthPgm = atoi (c1.c_str ()) ;
-	   this -> m_dimension [0] = (widthPgm) ; // Largeur.
-	   while (c == ' ' || c == '\n')
-	   {
+       widthPgm = atoi (c1.c_str ()) ;
+       this -> m_dimension [0] = (widthPgm) ; // Largeur.
+       while (c == ' ' || c == '\n')
+       {
            f -> get (c) ;
-	   }
-	
-	   while (c != ' ' && c != '\n')
-	   {
-	       c2 += c ;
+       }
+
+       while (c != ' ' && c != '\n')
+       {
+           c2 += c ;
            f -> get (c) ;
-	   }
-	   heightPgm = atoi (c2.c_str ()) ;
-	   this -> m_dimension [1] = (heightPgm) ; // Hauteur.
-	   while (c == ' ' || c == '\n')
-	   {
+       }
+       heightPgm = atoi (c2.c_str ()) ;
+       this -> m_dimension [1] = (heightPgm) ; // Hauteur.
+       while (c == ' ' || c == '\n')
+       {
            f -> get (c) ;
-	   }
-	
-	   // Valeur max.
-	   while (c != ' ' && c != '\n')
-	   {
-	       c3 += c ;
+       }
+
+       // Valeur max.
+       while (c != ' ' && c != '\n')
+       {
+           c3 += c ;
            f -> get (c) ;
-	   }
-	   while (c == ' ' || c == '\n')
-	   {
+       }
+       while (c == ' ' || c == '\n')
+       {
            f -> get (c) ;
-	   }
-	   maxPgm = atoi (c3.c_str ()) ;
-	   if (maxPgm > 255)
-	   {
-	       exit (-1) ;
-	   }
-	
-	   // Parcourir les pixels.
-	   int i = 0 ;
-	   while (i < this -> m_dimension [0] * this -> m_dimension [1])
-	   {
+       }
+       maxPgm = atoi (c3.c_str ()) ;
+       if (maxPgm > 255)
+       {
+           exit (-1) ;
+       }
+
+       // Parcourir les pixels.
+       int i = 0 ;
+       while (i < this -> m_dimension [0] * this -> m_dimension [1])
+       {
            while (c == ' ' || c == '\n' && (! f->eof ()))
-	       {
+           {
                f -> get (c) ;
-	       }
+           }
            while (c != ' ' && c != '\n' && (! f->eof ()))
-	       {
-	           cPix += c ;
+           {
+               cPix += c ;
                f ->get (c) ;
-	       }
-	       pixel = atoi (cPix.c_str ()) ;
-	       this -> m_image [i] = pixel ;
-	       cPix = "" ;
-	       i ++ ;
+           }
+           pixel = atoi (cPix.c_str ()) ;
+           this -> m_image [i] = pixel ;
+           cPix = "" ;
+           i ++ ;
        }
    }
    else

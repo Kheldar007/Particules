@@ -19,17 +19,17 @@ class CsgNode
 {
     private :
         /**
-         * @brief identifier L'identifiant du noeud.
+         * @brief m_identifier L'identifiant du noeud.
          */
-        int identifier ;
+        int m_identifier ;
         /**
-         * @brief parent Le noeud parent.
+         * @brief m_parent Le noeud parent.
          */
-        CsgNode * parent ;
+        CsgNode * m_parent ;
         /**
-         * @brief boundingBox
+         * @brief m_boundingBox
          */
-        BoundingBox boundingBox ;
+        BoundingBox m_boundingBox ;
 
     public :
         /**
@@ -47,16 +47,23 @@ class CsgNode
          */
         void CN_setBoundingBox (BoundingBox bb) ;
 
+        /******************************** Accesseurs. *********************************/
+
         /**
          * @brief  CN_getParent Retourner le parent.
          * @return Le parent.
          */
         CsgNode * CN_getParent () ;
         /**
-         * @brief  CN_getIdentifier Retourner l'identifiant'.
+         * @brief  CN_getIdentifier Retourner l'identifiant.
          * @return L'identifiant.
          */
         int CN_getIdentifier () ;
+        /**
+         * @brief  CN_getBoundingBox Retourner la boite englobante.
+         * @return m_boundingBox.
+         */
+        BoundingBox CN_getBoundingBox () ;
 } ;
 
 

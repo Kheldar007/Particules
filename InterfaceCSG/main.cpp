@@ -1,6 +1,5 @@
 #include <QApplication>
 #include "mainwindow.h"
-# include "boundingbox.h"
 # define DEBUG 0
 
 int main(int argc, char *argv[])
@@ -11,6 +10,9 @@ int main(int argc, char *argv[])
 
     if (DEBUG) // Tests.
     {
+        Image2Grey i ;
+        i.I2G_loadFromPGM("../test.pgm") ;
+
         std::cout << "\nDebug.\n" << std::endl ;
     }
     else

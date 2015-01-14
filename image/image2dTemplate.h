@@ -43,6 +43,23 @@ template <typename T> class Image2D : public Image <2 , T>
          * @return m_image
          */
         T * I2D_getImage () const ;
+        /**
+         * @brief  I2D_getPixel Accesseur.
+         * @param  i L'abscisse.
+         * @param  j L'ordonnee.
+         * @return Le pixel de coordonnees (i,j).
+         */
+        T I2D_getPixel (int i , int j) ;
+
+        /******************************************************************************/
+
+        /**
+         * @brief I2D_setPixel Modifier un pixel d'une image.
+         * @param i     L'abscisse.
+         * @param j     L'ordonnee.
+         * @param color La nouvelle valeur du pixel.
+         */
+        void I2D_setPixel (int i , int j , T color) ;
 } ;
 
 

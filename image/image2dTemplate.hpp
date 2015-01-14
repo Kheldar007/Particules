@@ -40,5 +40,19 @@ template <typename T> T * Image2D <T>::I2D_getImage () const
     return (* this).m_image ;
 }
 
+template <typename T> void Image2D <T>::I2D_setPixel (int i , int j , T color)
+{
+    assert (i >= 0) ;
+    assert (i <= 1) ;
+    assert (j >= 0) ;
+    assert (j <= 1) ;
+    this -> m_image [(i - 1) * (this -> m_dimension [1]) + j - 1] = color ;
+}
+
+template <typename T> T Image2D <T>::I2D_getPixel (int i , int j)
+{
+    return this -> m_image [(i - 1) * (this -> m_dimension [1]) + j - 1] ;
+}
+
 
 # endif

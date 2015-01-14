@@ -20,9 +20,9 @@ class Pixel
 {
     public :
 
-        float r ;
-        float g ;
-        float b ;
+        unsigned char r ;
+        unsigned char g ;
+        unsigned char b ;
 } ;
 
 

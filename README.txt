@@ -9,6 +9,7 @@ TODO :
 - GradientSobel::GradientSobel
 - CsgTree::CT_load
 - CsgTree::CT_save
+- CsgTree::CT_draw
 
 
 Comment faire pour pouvoir écrire V = 0.5f * V ?

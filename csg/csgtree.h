@@ -18,7 +18,6 @@
 /**
  * @brief CsgTree Arbre.
 
-Cloner un nœud
 Enlever un nœud et remettre ces 2 fils dans les racines
 Swap fils droit/ fils gauche
 
@@ -69,10 +68,16 @@ class CsgTree
          */
         void CT_save (std::string format) ;
         /**
-         * @brief CT_treeToImage Rendu du graphe dans une image a niveau de gris.
+         * @brief CT_draw Rendu du graphe dans une image a niveau de gris.
          * @param image L'image.
          */
-        void CT_treeToImage (const Image2Grey & image) ;
+        void CT_draw (const Image2Grey & image) ;
+        /**
+         * @brief  CT_clone Cloner un noeud.
+         * @param  node Le noeud a cloner
+         * @return Copie de node.
+         */
+        CsgNode * CT_clone (CsgNode * node) ;
 } ;
 
 class Map
