@@ -16,7 +16,7 @@ QMAKE_CXXFLAGS += -Wall
 INCLUDEPATH += ../vectorMatrix ../image ../csg ../particle
 
 LIBS +=  -L ../lib \
-#	-lcsg   \
+	-lcsg   \
 	-limage \
         -lvectorMatrix \
 #   -lparticle \

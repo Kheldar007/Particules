@@ -21,7 +21,7 @@ void Image2Grey::I2G_loadFromPGM (const std::string & file)
    std::ifstream * f = new std::ifstream ("test.pgm" /*file.c_str ()*/ , std::ifstream::in) ; // Ouvrir le fichier.
 //   f -> open ("test.pgm" , std::ifstream::in) ;
 
-   if (f -> is_open()) // Veririer s'il y a une erreur avec le fichier.
+   if (f -> is_open()) // Verifier s'il y a une erreur avec le fichier.
    {
        std::cout << "Yahoo" << std::endl ;
 	   char char1 , char2 , c ;

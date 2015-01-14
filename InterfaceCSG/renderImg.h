@@ -3,7 +3,7 @@
 
 #include <QGLWidget>
 
-//#include "image2grey.h"
+#include "image2grey.h"
 //#include "vec2f.h"
 //#include "particle.h"
 
