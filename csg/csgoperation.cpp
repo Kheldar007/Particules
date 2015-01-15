@@ -43,4 +43,5 @@ BoundingBox CsgOperation::get_BB ()
     {
         static_cast <CsgOperation *> (m_parent) -> get_BB () ;
     }
+    return m_boundingBox ;
 }

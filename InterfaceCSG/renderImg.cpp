@@ -30,21 +30,26 @@ RenderImg::RenderImg( QWidget *parent ):
 
 void RenderImg::loadTexture(const std::string& filename)
 {
-	// VOTRE CODE ICI
+    m_image.I2G_loadFromPGM(filename);
+    m_widthTex  = m_image.I2D_getDimension () [0] ;
+    m_heightTex = m_image.I2D_getDimension () [1] ;
+    m_ptrTex = & (m_image.I2D_getImage () [0]) ;
 
-    Image2Grey i ;
-    i.I2G_loadFromPGM(filename);
+    //
 
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, m_widthTex, m_heightTex, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, m_ptrTex);
 	glBindTexture(GL_TEXTURE_2D, 0);
+    updateGL();
 }
 
 
 
 void RenderImg::updateDataTexture()
 {
-	// VOTRE CODE ICI
+    m_widthTex  = m_image.I2D_getDimension () [0] ;
+    m_heightTex = m_image.I2D_getDimension () [1] ;
+    m_ptrTex = & (m_image.I2D_getImage () [0]) ;
 
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 	glTexSubImage2D(GL_TEXTURE_2D,0,0,0,m_widthTex, m_heightTex, GL_LUMINANCE, GL_UNSIGNED_BYTE, m_ptrTex);
@@ -55,12 +60,12 @@ void RenderImg::updateDataTexture()
 
 unsigned int RenderImg::getWidth()
 {
-	return 0; // RETURN IMAGE WIDTH
+    return m_widthTex;
 }
 
 unsigned int RenderImg::getHeight()
 {
-		return 0; // RETURN IMAGE HEIGHT
+        return m_heightTex;
 }
 
 Image2Grey & RenderImg::getImg ()
@@ -130,8 +135,8 @@ void RenderImg::paintGL()
 	glEnd();
 
 
-//	glEnable(GL_TEXTURE_2D);
-//	glBindTexture(GL_TEXTURE_2D, m_texture);
+//    glEnable(GL_TEXTURE_2D);
+//    glBindTexture(GL_TEXTURE_2D, m_texture);
 
 //	glColor3f(1.0,1.0,1.0);
 //	glBegin(GL_QUADS);

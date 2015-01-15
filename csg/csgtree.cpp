@@ -43,7 +43,7 @@ void CsgTree::CT_draw (const Image2Grey & image , CsgNode * currentNode)
         j = castedNode -> get_BB ().BB_getYMin () ;
         while (j < castedNode -> get_BB ().BB_getYMax ()) // Parcourir la bounding box en hauteur.
         {
-            if ((i >= 0) && (i < image.I_getDimension () [0]) && (j >= 0) && (j < image.I2D_getDimension () [0]))
+            if ((i >= 0) && (i < image.I2D_getDimension () [0]) && (j >= 0) && (j < image.I2D_getDimension () [1]))
             {
 //                if ((* it) -> intersect (x , y))
 //                {
