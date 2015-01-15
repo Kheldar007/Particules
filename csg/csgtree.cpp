@@ -33,37 +33,35 @@ void CsgTree::CT_save (std::string format)
 {
 }
 
-void CsgTree::CT_draw (const Image2Grey & image)
+void CsgTree::CT_draw (const Image2Grey & image , CsgNode * currentNode)
 {
-    std::set <CsgNode *>::iterator it = m_roots.begin() ;
-    while (it != m_roots.end ())
+    currentNode -> CN_set_BB (currentNode -> get_BB ()) ;
+    CsgNode * castedNode = static_cast <CsgNode *> (currentNode) ;
+    int i = castedNode -> get_BB ().BB_getXMin () , j = 0 ;
+    while (i < castedNode -> get_BB ().BB_getXMax ()) // Parcourir la bounding box en largeur.
     {
-        int i = (* it) -> CN_getBoundingBox ().BB_getXMin () , j = 0 ;
-        while (i < (* it) -> CN_getBoundingBox ().BB_getXMax ()) // Parcourir la bounding box en largeur.
+        j = castedNode -> get_BB ().BB_getYMin () ;
+        while (j < castedNode -> get_BB ().BB_getYMax ()) // Parcourir la bounding box en hauteur.
         {
-            j = (* it) -> CN_getBoundingBox ().BB_getYMin () ;
-            while (j < (* it) -> CN_getBoundingBox ().BB_getYMax ()) // Parcourir la bounding box en hauteur.
+            if ((i >= 0) && (i < image.I_getDimension () [0]) && (j >= 0) && (j < image.I2D_getDimension () [0]))
             {
-                if ((i >= 0) && (i < image.I_getDimension () [0]) && (j >= 0) && (j < image.I2D_getDimension () [0]))
-                {
-//                    if ((* it) -> intersect (x , y))
-//                    {
-//                        image.I2D_setPixel (j , i , 1) ;
-//                    }
-//                    else
-//                    {
-//                        image.I2D_setPixel (j , i , 0) ;
-//                    }
-                }
-
-                j ++ ;
+//                if ((* it) -> intersect (x , y))
+//                {
+//                    image.I2D_setPixel (j , i , 1) ;
+//                }
+//                else
+//                {
+//                    image.I2D_setPixel (j , i , 0) ;
+//                }
             }
 
-            i ++ ;
+            j ++ ;
         }
 
         i ++ ;
     }
+
+    i ++ ;
 }
 
 CsgNode * CsgTree::CT_clone (int id)
@@ -107,8 +105,8 @@ void CsgTree::CT_addPrimitive (CsgPrimitive * primitive)
         node)) ;
 }
 
-void CsgTree::CT_addOperation(CsgOperation operation , CsgNode * node1 ,
-            CsgNode * node2)
+CsgNode * CsgTree::CT_addOperation (Operation operation , CsgNode * node1 ,
+    CsgNode * node2)
 {
     /***************** Chercher les deux noeuds dans les racines. *****************/
     std::set <CsgNode * , Sort>::iterator it1 = m_roots.find (node1) ;
@@ -118,7 +116,7 @@ void CsgTree::CT_addOperation(CsgOperation operation , CsgNode * node1 ,
     /******************************************************************************/
 
     CsgNode * node = new CsgOperation (operation , node1 , node2) ;
-    static_cast <CsgOperation *> (node) -> CO_resizeBoundingBox () ;
+    static_cast <CsgOperation *> (node) -> get_BB () ;
 
     /****************** Suppression des noeuds dans les racines. ******************/
     m_roots.erase (it1) ;
@@ -128,4 +126,6 @@ void CsgTree::CT_addOperation(CsgOperation operation , CsgNode * node1 ,
     m_roots.insert (node) ;
     m_map.insert (std::pair <int , CsgNode *> (node -> CN_getIdentifier () ,
         node)) ;
+
+    node ;
 }

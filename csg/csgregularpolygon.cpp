@@ -7,6 +7,6 @@
 # include "csgregularpolygon.h"
 
 
-CsgRegularPolygon::CsgRegularPolygon ()
+CsgRegularPolygon::CsgRegularPolygon (int)
 {
 }

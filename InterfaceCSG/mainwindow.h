@@ -5,9 +5,11 @@
 #include <QPlainTextEdit>
 #include <QKeyEvent>
 
+# include "csgdisk.h"
+# include "csgregularpolygon.h"
+#include "csgtree.h"
+# include "matrix33f.h"
 #include "renderImg.h"
-//#include "csgPrimitive.h"
-//#include "csgTree.h"
 
 #include <map>
 
@@ -46,29 +48,29 @@ private:
 
 protected:
 	/// current selected node
-//	CsgNode* m_currentNode;
+    CsgNode* m_currentNode;
 
 //	/// current primitive (could be NULL)
-//	CsgPrimitive * m_prim;
+    CsgPrimitive * m_prim;
 
 //	/// current operation (could be NULL)
-//	CsgOperation * m_oper;
+    CsgOperation * m_oper;
 
 //	/// the CSG tree
-//	CsgTree m_tree;
+    CsgTree m_tree;
 
 	/// Bounding Box to draw
-//	BoundingBox m_bb;
+    BoundingBox m_bb;
 
 	/// widget for ascii art grapg drawing
 	GraphTextEdit* m_graphTextEdit;
 
 	/// current transfo matrix for storing current primitive matrix
-//	Matrix33f m_transfo;
+//    Matrix33f m_transfo;
 
-//	std::vector<Matrix33f> m_transfos;
-//	std::vector<CsgPrimitive*> m_prims;
-//	Vec2f m_centerSelection;
+//    std::vector<Matrix33f> m_transfos;
+//    std::vector<CsgPrimitive*> m_prims;
+    Vec2f m_centerSelection;
 
 	/// just to avoid ping-pong signal
 	bool m_stopSignal;

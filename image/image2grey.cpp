@@ -81,7 +81,7 @@ void Image2Grey::I2G_loadFromPGM (const std::string & file)
        int i = 0 ;
        while (i < this -> m_dimension [0] * this -> m_dimension [1])
        {
-           while (c == ' ' || c == '\n' && (! f->eof ()))
+           while ((c == ' ' || c == '\n') && (! f->eof ()))
            {
                f -> get (c) ;
            }

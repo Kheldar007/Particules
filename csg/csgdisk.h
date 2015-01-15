@@ -8,10 +8,13 @@
 # define CSGDISK_H
 
 
+# include "csgprimitive.h"
+
+
 /**
  * @brief CsgDisk Un disque.
  */
-class CsgDisk
+class CsgDisk : public CsgPrimitive
 {
     public :
         CsgDisk () ;

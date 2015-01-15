@@ -30,8 +30,8 @@ class CsgOperation : public CsgNode
     public :
 
         CsgOperation () ;
-        CsgOperation (CsgOperation operation , CsgNode * node1 , CsgNode * node2) ;
-        void CO_resizeBoundingBox () ;
+        CsgOperation (Operation operation , CsgNode * node1 , CsgNode * node2) ;
+        virtual BoundingBox get_BB () ;
 } ;
 
 

@@ -57,7 +57,7 @@ class CsgNode
          * @brief setBoundingBox Mutateur.
          * @param bb Nouvelle bounding box.
          */
-        void CN_setBoundingBox (BoundingBox bb) ;
+        void CN_set_BB (BoundingBox bb) ;
         /**
          * @brief CN_setParent Mutateur.
          * @param node m_parent
@@ -97,10 +97,11 @@ class CsgNode
          */
         CsgNode * CN_getRightChild () ;
         /**
-         * @brief  CN_getBoundingBox Retourner la boite englobante.
+         * @brief  get_local_BB Retourner la boite englobante.
          * @return m_boundingBox.
          */
-        BoundingBox CN_getBoundingBox () ;
+        BoundingBox get_local_BB () ;
+        virtual BoundingBox get_BB () ;
 } ;
 
 

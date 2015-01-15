@@ -11,36 +11,36 @@ CsgOperation::CsgOperation ()
 {
 }
 
-CsgOperation::CsgOperation (CsgOperation operation , CsgNode * node1 , CsgNode * node2)
+CsgOperation::CsgOperation (Operation operation , CsgNode * node1 , CsgNode * node2)
 {
 
 }
 
-void CsgOperation::CO_resizeBoundingBox ()
+BoundingBox CsgOperation::get_BB ()
 {
     switch (m_operation)
     {
         case UNION :
         {
-            m_boundingBox = m_leftChild -> CN_getBoundingBox () +
-                            m_rightChild -> CN_getBoundingBox () ;
+            m_boundingBox = m_leftChild -> get_BB () +
+                            m_rightChild -> get_BB () ;
             break ;
         }
         case INTERSECTION :
         {
-            m_boundingBox = m_leftChild -> CN_getBoundingBox () ^
-                            m_rightChild -> CN_getBoundingBox () ;
+            m_boundingBox = m_leftChild -> get_BB () ^
+                            m_rightChild -> get_BB () ;
             break ;
         }
         case DIFFERENCE :
         {
-            m_boundingBox = m_leftChild -> CN_getBoundingBox () -
-                            m_rightChild -> CN_getBoundingBox () ;
+            m_boundingBox = m_leftChild -> get_BB () -
+                            m_rightChild -> get_BB () ;
             break ;
         }
     }
     if (m_parent != NULL)
     {
-        static_cast <CsgOperation *> (m_parent) -> CO_resizeBoundingBox () ;
+        static_cast <CsgOperation *> (m_parent) -> get_BB () ;
     }
 }

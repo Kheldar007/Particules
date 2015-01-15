@@ -23,7 +23,7 @@ CsgNode::CsgNode (int id, CsgNode * p)
     m_rightChild = NULL ; // Pas de fils droit.
 }
 
-void CsgNode::CN_setBoundingBox (BoundingBox bb)
+void CsgNode::CN_set_BB (BoundingBox bb)
 {
     m_boundingBox = bb ; // Affecter la bounding box.
 }
@@ -63,7 +63,12 @@ CsgNode * CsgNode::CN_getRightChild ()
     return m_rightChild ;
 }
 
-BoundingBox CsgNode::CN_getBoundingBox ()
+BoundingBox CsgNode::get_local_BB ()
+{
+    return m_boundingBox ;
+}
+
+BoundingBox CsgNode::get_BB ()
 {
     return m_boundingBox ;
 }

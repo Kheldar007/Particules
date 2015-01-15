@@ -63,6 +63,11 @@ unsigned int RenderImg::getHeight()
 		return 0; // RETURN IMAGE HEIGHT
 }
 
+Image2Grey & RenderImg::getImg ()
+{
+    return m_image ;
+}
+
 RenderImg::~RenderImg()
 {
 	glDeleteTextures(1, &m_texture);

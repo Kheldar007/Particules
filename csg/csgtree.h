@@ -80,9 +80,10 @@ class CsgTree
         void CT_save (std::string format) ;
         /**
          * @brief CT_draw Rendu du graphe dans une image a niveau de gris.
-         * @param image L'image.
+         * @param image       L'image.
+         * @param currentNode Le noeud courant.
          */
-        void CT_draw (const Image2Grey & image) ;
+        void CT_draw (const Image2Grey & image , CsgNode * currentNode) ;
         /**
          * @brief  CT_clone Cloner un noeud.
          * @param  node Le noeud a cloner
@@ -100,7 +101,8 @@ class CsgTree
          */
         void CT_swapSons (CsgNode * node) ;
         void CT_addPrimitive (CsgPrimitive * primitive) ;
-        void CT_addOperation (CsgOperation operation , CsgNode * node1 , CsgNode * node2) ;
+        CsgNode * CT_addOperation(Operation operation , CsgNode * node1 ,
+            CsgNode * node2) ;
 } ;
 
 

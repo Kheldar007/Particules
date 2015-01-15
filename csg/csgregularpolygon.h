@@ -8,13 +8,16 @@
 # define CSGREGULARPOLYGON_H
 
 
+# include "csgprimitive.h"
+
+
 /**
  * @brief CsgRegularPolygon Polygone regulier.
  */
-class CsgRegularPolygon
+class CsgRegularPolygon : public CsgPrimitive
 {
     public :
-        CsgRegularPolygon () ;
+        CsgRegularPolygon (int) ;
 } ;
 
 

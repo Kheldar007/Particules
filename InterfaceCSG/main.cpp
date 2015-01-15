@@ -4,9 +4,9 @@
 
 int main(int argc, char *argv[])
 {
-//    QApplication a(argc, argv);
-//     MainWindow w;
-//     w.show();
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
 
     if (DEBUG) // Tests.
     {
@@ -17,5 +17,5 @@ int main(int argc, char *argv[])
         std::cout << "\nThe game is on !\n" << std::endl ;
     }
 
-//    return a.exec();
+    return a.exec();
 }

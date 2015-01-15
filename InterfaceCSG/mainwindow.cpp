@@ -15,9 +15,9 @@
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
 	ui(new Ui::MainWindow),
-//	m_currentNode(NULL),
-//	m_prim(NULL),
-//	m_oper(NULL),
+    m_currentNode(NULL),
+    m_prim(NULL),
+    m_oper(NULL),
 	m_graphTextEdit(NULL),
 	m_stopSignal(false)
 
@@ -99,11 +99,20 @@ void MainWindow::createPrimtive()
 	int prim =  ui->prim_type->currentIndex();
 	int sides = ui->nb_sides->value();
 
-// VOTRE CODE ICI : primitive creation
-//	m_currentNode = ??
+    if (prim == 0) // Disque.
+    {
+        m_currentNode = new CsgDisk () ;
+    }
+    else // Polygone regulier.
+    {
+        m_currentNode = new CsgRegularPolygon (sides) ;
+    }
+    m_tree.CT_addPrimitive (static_cast <CsgPrimitive *> (m_currentNode)) ;
+    // Faire translater la primitive au centre.
+    // TODO
 
 	drawTree();
-//	ui->currentNode->setValue(??); // recupere l'id du noeud cree
+    ui->currentNode->setValue(m_currentNode -> CN_getIdentifier ()); // recupere l'id du noeud cree
 	updateTextGraph();
 }
 
@@ -113,6 +122,8 @@ void MainWindow::createOperation()
 	int typeOp = ui->Operation->currentIndex();
 	int left = ui->id_filsGauche->value();
 	int right = ui->id_filsDroit->value();
+    CsgNode * nodeLeft = m_tree.CT_map (left + 1) ; // Trouver les fils.
+    CsgNode * nodeRight = m_tree.CT_map (right + 1) ;
 
 	std::cout << "createOperation  ";
 	std::cout << "type "<< typeOp;
@@ -124,14 +135,20 @@ void MainWindow::createOperation()
 	{
 //			Ici on recupère les deux fils à partir des identifiants et on crée le noeud operation correspondant
 		case 0:
-
+        {
+            m_currentNode = m_tree.CT_addOperation (UNION , nodeLeft , nodeRight) ;
 			break;
-		case 1:
-
-			break;
-		case 2:
-
-			break;
+        }
+        case 1:
+        {
+            m_currentNode = m_tree.CT_addOperation (INTERSECTION , nodeLeft , nodeRight) ;
+            break;
+        }
+        case 2:
+        {
+            m_currentNode = m_tree.CT_addOperation (DIFFERENCE , nodeLeft , nodeRight) ;
+            break;
+        }
 		default:
 			std::cerr << "unknown operation" << std::endl;
 			return;
@@ -142,7 +159,7 @@ void MainWindow::createOperation()
 	drawTree();
 
 //	if (oper != NULL)
-//		ui->currentNode->setValue(oper->getId());
+        ui->currentNode->setValue(m_currentNode->CN_getIdentifier());
 
 //	m_currentNode = oper;
 
@@ -367,12 +384,9 @@ void MainWindow::drawTree()
 {
 	m_render->clean();
 
-	// VOTRE CODE ICI (trace le graph dans l'image de m_render
-
-	if (ui->checkBox_drawCurrent->isChecked()/* && m_currentNode!=NULL*/)
+    if (ui->checkBox_drawCurrent->isChecked() && m_currentNode!=NULL)
 	{
-		// OPTION: trace le noeud courant dans l'image de m_render
-		// VOTRE CODE ICI
+        m_tree.CT_draw (m_render -> getImg () , m_currentNode) ;
 
 		m_render->setBBDraw(true);
 	}

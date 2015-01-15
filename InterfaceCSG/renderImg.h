@@ -23,7 +23,7 @@ public:
 	void loadTexture(const std::string& filename);
 	void updateDataTexture();
 
-//	Image2grey & getImg();
+    Image2Grey & getImg();
 	unsigned int getWidth();
 	unsigned int getHeight();
 
@@ -106,7 +106,7 @@ protected:
 	void drawSobel();
 
 //	ici les declaration de:
-//   - l'image a niveau de gris
+    Image2Grey m_image;
 //	 - l'image gradiant'
 
 //	 la fontaine de particule
