@@ -103,6 +103,81 @@ void CsgTree::CT_deleteNode (int id)
         m_roots.erase (node) ; // Supprimer l'element.
         delete node ;
     }
+    else
+    {
+        assert (node -> CN_getParent() != NULL) ; // Verifier qu'il n'y ait pas d'erreur. Si le noeud n'est pas une racine, il ne devrait pas avoir de parent.
+        std::set <CsgNode *>::iterator it2 = m_roots.find (node -> CN_getParent ()) ;
+        if (it2 != m_roots.end ()) // Si le pere est une racine.
+        {
+            CT_deleteNodesRec (node) ;
+            m_roots.erase (node -> CN_getParent ()) ;
+            if (node -> CN_getParent () -> CN_getLeftChild () == node) // Si c'est le fils gauche, placer le fils droit dans la racine.
+            {
+                m_roots.insert (node -> CN_getParent () -> CN_getRightChild ()) ;
+                node -> CN_getParent () -> CN_setRightChild (NULL) ;
+                delete (node -> CN_getParent ()) ;
+            }
+            else if (node -> CN_getParent () -> CN_getRightChild () == node) // Si c'est le fils droit, placer le fils gauche dans la racine.
+            {
+                m_roots.insert (node -> CN_getParent () -> CN_getLeftChild ()) ;
+                node -> CN_getParent () -> CN_setLeftChild (NULL) ;
+                delete (node -> CN_getParent ()) ;
+            }
+        }
+//        else
+//        {
+//            assert((new_ptr->getParent())->getParent()!=NULL);
+//            std::set<csgNode *>::iterator it3 = roots.find((new_ptr->getParent())->getParent());
+//            if(it3 != roots.end())//Cas général grand père qui est racine
+//            {
+//                removeNodeRec(new_ptr);
+//                csgNode * Father = new_ptr->getParent();
+//                csgNode * grandFather = (new_ptr->getParent())->getParent();
+//                if(static_cast<csgOperation *>(new_ptr->getParent())->isLeft(new_ptr))
+//                {
+//                    if(static_cast<csgOperation *>(grandFather)->isLeft(Father))
+//                    {
+//                        static_cast<csgOperation *>(grandFather)->setLeft(static_cast<csgOperation *>(Father)->getRight());
+//                        static_cast<csgOperation *>(Father)->setRight(NULL);
+//                        delete Father;
+//                    }
+//                    else if(static_cast<csgOperation *>(grandFather)->isRight(Father))
+//                    {
+//                        static_cast<csgOperation *>(grandFather)->setRight(static_cast<csgOperation *>(Father)->getRight());
+//                        static_cast<csgOperation *>(Father)->setRight(NULL);
+//                        delete Father;
+//                    }
+//                    else
+//                    {
+//                        assert(0);
+//                    }
+//                }
+//                else if(static_cast<csgOperation *>(new_ptr->getParent())->isRight(new_ptr))
+//                {
+//                    if(static_cast<csgOperation *>(grandFather)->isLeft(Father))
+//                    {
+//                        static_cast<csgOperation *>(grandFather)->setLeft(static_cast<csgOperation *>(Father)->getLeft());
+//                        static_cast<csgOperation *>(Father)->setLeft(NULL);
+//                        delete Father;
+//                    }
+//                    else if(static_cast<csgOperation *>(grandFather)->isRight(Father))
+//                    {
+//                        static_cast<csgOperation *>(grandFather)->setRight(static_cast<csgOperation *>(Father)->getLeft());
+//                        static_cast<csgOperation *>(Father)->setLeft(NULL);
+//                        delete Father;
+//                    }
+//                    else
+//                    {
+//                        assert(0);
+//                    }
+//                }
+//                else
+//                {
+//                    assert(0);
+//                }
+//            }
+//        }
+    }
 }
 
 void CsgTree::CT_swapSons (CsgNode * node)
