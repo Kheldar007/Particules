@@ -80,17 +80,9 @@ CsgNode * CsgTree::CT_clone (int id)
 void CsgTree::CT_deleteNodesRec (CsgNode * node)
 {
     m_map.erase (node -> CN_getIdentifier ()) ; // Supprimer de la map.
-//    if (dynamic_cast <CsgPrimitive *> (node) != NULL) // Si c'est une primitive.
-//    {
-//        m_leaves.erase (node) ; // Supprimer des feuilles, car c'est une primitive.
-//    }
-//    else if (dynamic_cast <CsgOperation *> (node) != NULL) // C'est une operation.
-//    {
-//        /***************** Supprimer les enfants, leurs enfants etc. ******************/
-//        CT_deleteNodesRec (node -> CN_getLeftChild ()) ;
-//        CT_deleteNodesRec (node -> CN_getRightChild ()) ;
-//        /******************************************************************************/
-//    }
+    node -> CN_getParent () -> CN_setLeftChild (node -> CN_getLeftChild ()) ;
+    node -> CN_getParent () -> CN_setRightChild (node -> CN_getRightChild ()) ;
+    delete node ;
 }
 
 void CsgTree::CT_deleteNode (int id)
@@ -105,66 +97,68 @@ void CsgTree::CT_deleteNode (int id)
     }
     else
     {
-        assert (node -> CN_getParent() != NULL) ; // Verifier qu'il n'y ait pas d'erreur. Si le noeud n'est pas une racine, il ne devrait pas avoir de parent.
-        std::set <CsgNode *>::iterator it2 = m_roots.find (node -> CN_getParent ()) ;
+        CsgNode * parent = node -> CN_getParent () ;
+        assert (parent != NULL) ; // Verifier qu'il n'y ait pas d'erreur. Si le noeud n'est pas une racine, il ne devrait pas avoir de parent.
+        std::set <CsgNode *>::iterator it2 = m_roots.find (parent) ;
         if (it2 != m_roots.end ()) // Si le pere est une racine.
         {
             CT_deleteNodesRec (node) ;
-            m_roots.erase (node -> CN_getParent ()) ;
-            if (node -> CN_getParent () -> CN_getLeftChild () == node) // Si c'est le fils gauche, placer le fils droit dans la racine.
+            m_roots.erase (parent) ;
+            if (parent -> CN_getLeftChild () == node) // Si c'est le fils gauche, placer le fils droit dans la racine.
             {
-                m_roots.insert (node -> CN_getParent () -> CN_getRightChild ()) ;
-                node -> CN_getParent () -> CN_setRightChild (NULL) ;
-                delete (node -> CN_getParent ()) ;
+                m_roots.insert (parent -> CN_getRightChild ()) ;
+                parent -> CN_setRightChild (NULL) ;
+                delete (parent) ;
             }
-            else if (node -> CN_getParent () -> CN_getRightChild () == node) // Si c'est le fils droit, placer le fils gauche dans la racine.
+            else if (parent -> CN_getRightChild () == node) // Si c'est le fils droit, placer le fils gauche dans la racine.
             {
-                m_roots.insert (node -> CN_getParent () -> CN_getLeftChild ()) ;
-                node -> CN_getParent () -> CN_setLeftChild (NULL) ;
-                delete (node -> CN_getParent ()) ;
+                m_roots.insert (parent -> CN_getLeftChild ()) ;
+                parent -> CN_setLeftChild (NULL) ;
+                delete (parent) ;
             }
         }
-//        else
-//        {
-//            assert((new_ptr->getParent())->getParent()!=NULL);
-//            std::set<csgNode *>::iterator it3 = roots.find((new_ptr->getParent())->getParent());
-//            if(it3 != roots.end())//Cas général grand père qui est racine
+        else
+        {
+            CsgNode * grandParent = parent -> CN_getParent () ;
+            assert (grandParent != NULL) ; // Il y a un grand-parent, vu que le parent n'est pas dans la racine.
+            std::set <CsgNode *>::iterator it3 = m_roots.find (grandParent) ;
+//            if(it3 != m_roots.end())//Cas général grand père qui est racine
 //            {
 //                removeNodeRec(new_ptr);
-//                csgNode * Father = new_ptr->getParent();
-//                csgNode * grandFather = (new_ptr->getParent())->getParent();
-//                if(static_cast<csgOperation *>(new_ptr->getParent())->isLeft(new_ptr))
+//                csgNode * parent = new_ptr->CN_getParent ();
+//                csgNode * grandParent = (new_ptr->CN_getParent ())->CN_getParent ();
+//                if(static_cast<csgOperation *>(new_ptr->CN_getParent ())->isLeft(new_ptr))
 //                {
-//                    if(static_cast<csgOperation *>(grandFather)->isLeft(Father))
+//                    if(static_cast<csgOperation *>(grandParent)->isLeft(parent))
 //                    {
-//                        static_cast<csgOperation *>(grandFather)->setLeft(static_cast<csgOperation *>(Father)->getRight());
-//                        static_cast<csgOperation *>(Father)->setRight(NULL);
-//                        delete Father;
+//                        (grandParent)->setLeft(static_cast<csgOperation *>(parent)->getRight());
+//                        (parent)->setRight(NULL);
+//                        delete parent;
 //                    }
-//                    else if(static_cast<csgOperation *>(grandFather)->isRight(Father))
+//                    else if(static_cast<csgOperation *>(grandParent)->isRight(parent))
 //                    {
-//                        static_cast<csgOperation *>(grandFather)->setRight(static_cast<csgOperation *>(Father)->getRight());
-//                        static_cast<csgOperation *>(Father)->setRight(NULL);
-//                        delete Father;
+//                        (grandParent)->setRight(static_cast<csgOperation *>(parent)->getRight());
+//                        (parent)->setRight(NULL);
+//                        delete parent;
 //                    }
 //                    else
 //                    {
 //                        assert(0);
 //                    }
 //                }
-//                else if(static_cast<csgOperation *>(new_ptr->getParent())->isRight(new_ptr))
+//                else if(static_cast<csgOperation *>(new_ptr->CN_getParent ())->isRight(new_ptr))
 //                {
-//                    if(static_cast<csgOperation *>(grandFather)->isLeft(Father))
+//                    if(static_cast<csgOperation *>(grandParent)->isLeft(parent))
 //                    {
-//                        static_cast<csgOperation *>(grandFather)->setLeft(static_cast<csgOperation *>(Father)->getLeft());
-//                        static_cast<csgOperation *>(Father)->setLeft(NULL);
-//                        delete Father;
+//                        (grandParent)->setLeft(static_cast<csgOperation *>(parent)->getLeft());
+//                        (parent)->setLeft(NULL);
+//                        delete parent;
 //                    }
-//                    else if(static_cast<csgOperation *>(grandFather)->isRight(Father))
+//                    else if(static_cast<csgOperation *>(grandParent)->isRight(parent))
 //                    {
-//                        static_cast<csgOperation *>(grandFather)->setRight(static_cast<csgOperation *>(Father)->getLeft());
-//                        static_cast<csgOperation *>(Father)->setLeft(NULL);
-//                        delete Father;
+//                        (grandParent)->setRight(static_cast<csgOperation *>(parent)->getLeft());
+//                        (parent)->setLeft(NULL);
+//                        delete parent;
 //                    }
 //                    else
 //                    {
@@ -176,7 +170,7 @@ void CsgTree::CT_deleteNode (int id)
 //                    assert(0);
 //                }
 //            }
-//        }
+        }
     }
 }
 
