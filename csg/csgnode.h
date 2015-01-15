@@ -17,7 +17,8 @@
  */
 class CsgNode
 {
-    private :
+    protected :
+
         /**
          * @brief m_identifier L'identifiant du noeud.
          */
@@ -40,6 +41,7 @@ class CsgNode
         BoundingBox m_boundingBox ;
 
     public :
+
         /**
          * @brief CsgNode Constructeur vide.
          */

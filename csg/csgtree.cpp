@@ -68,7 +68,13 @@ void CsgTree::CT_draw (const Image2Grey & image)
 
 CsgNode * CsgTree::CT_clone (int id)
 {
-    return new CsgNode (id , CT_map (id) -> CN_getParent ()) ;
+    CsgNode * node = CT_map (id) ; // Trouver le noeud.
+    CsgNode * result = new CsgNode (id , node -> CN_getParent ()) ;
+
+    result -> CN_setLeftChild (node -> CN_getLeftChild ()) ;
+    result -> CN_setRightChild (node -> CN_getRightChild ()) ;
+
+    return result ;
 }
 
 void CsgTree::CT_deleteNode (int id)
@@ -94,6 +100,29 @@ void CsgTree::CT_addPrimitive (CsgPrimitive * primitive)
 {
     CsgNode * node = primitive ; // La primitive doit etre un CsgNode.
     m_leaves.insert (node) ;
+    m_roots.insert (node) ;
+    m_map.insert (std::pair <int , CsgNode *> (node -> CN_getIdentifier () ,
+        node)) ;
+}
+
+void CsgTree::CT_addOperation(CsgOperation operation , CsgNode * node1 ,
+            CsgNode * node2)
+{
+    /***************** Chercher les deux noeuds dans les racines. *****************/
+    std::set <CsgNode * , Sort>::iterator it1 = m_roots.find (node1) ;
+    std::set <CsgNode * , Sort>::iterator it2 = m_roots.find (node2) ;
+    assert (it1 != m_roots.end ()) ;
+    assert (it2 != m_roots.end ()) ;
+    /******************************************************************************/
+
+    CsgNode * node = new CsgOperation (operation , node1 , node2) ;
+    static_cast <CsgOperation *> (node) -> CO_resizeBoundingBox () ;
+
+    /****************** Suppression des noeuds dans les racines. ******************/
+    m_roots.erase (it1) ;
+    m_roots.erase (it2) ;
+    /******************************************************************************/
+
     m_roots.insert (node) ;
     m_map.insert (std::pair <int , CsgNode *> (node -> CN_getIdentifier () ,
         node)) ;

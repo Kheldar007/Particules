@@ -57,99 +57,99 @@ void BoundingBox::BB_setYMax (float yMax)
     m_yMax = yMax ;
 }
 
-BoundingBox * BoundingBox::operator + (BoundingBox * bb)
+BoundingBox BoundingBox::operator + (BoundingBox bb)
 {
-    BoundingBox * result = new BoundingBox () ;
+    BoundingBox result ;
 
     /*************************** Cote le plus a gauche. ***************************/
-    if (m_xMin <= bb -> BB_getXMin ())
+    if (m_xMin <= bb.BB_getXMin ())
     {
-        result -> BB_setXMin (m_xMin) ;
+        result.BB_setXMin (m_xMin) ;
     }
     else
     {
-        result -> BB_setXMin (bb -> BB_getXMin ()) ;
+        result.BB_setXMin (bb.BB_getXMin ()) ;
     }
     /*************************** Cote le plus a droite. ***************************/
-    if (m_xMax >= bb -> BB_getXMax ())
+    if (m_xMax >= bb.BB_getXMax ())
     {
-        result -> BB_setXMax (m_xMax) ;
+        result.BB_setXMax (m_xMax) ;
     }
     else
     {
-        result -> BB_setXMax (bb -> BB_getXMax ()) ;
+        result.BB_setXMax (bb.BB_getXMax ()) ;
     }
     /**************************** Cote le plus en bas. ****************************/
-    if (m_yMin <= bb -> BB_getYMin ())
+    if (m_yMin <= bb.BB_getYMin ())
     {
-        result -> BB_setYMin (m_yMin) ;
+        result.BB_setYMin (m_yMin) ;
     }
     else
     {
-        result -> BB_setYMin (bb -> BB_getYMin ()) ;
+        result.BB_setYMin (bb.BB_getYMin ()) ;
     }
     /*************************** Cote le plus en haut. ****************************/
-    if (m_yMax >= bb -> BB_getYMax ())
+    if (m_yMax >= bb.BB_getYMax ())
     {
-        result -> BB_setYMax (m_yMax) ;
+        result.BB_setYMax (m_yMax) ;
     }
     else
     {
-        result -> BB_setYMax (bb -> BB_getYMax ()) ;
+        result.BB_setYMax (bb.BB_getYMax ()) ;
     }
     /******************************************************************************/
 
     return result ;
 }
 
-BoundingBox * BoundingBox::operator ^ (BoundingBox * bb)
+BoundingBox BoundingBox::operator ^ (BoundingBox bb)
 {
-    BoundingBox * result = new BoundingBox () ;
+    BoundingBox result ;
 
     /************************** Cote le moins a gauche. ***************************/
-    if (m_xMin <= bb -> BB_getXMin ())
+    if (m_xMin <= bb.BB_getXMin ())
     {
-        result -> BB_setXMin (bb -> BB_getXMin ()) ;
+        result.BB_setXMin (bb.BB_getXMin ()) ;
     }
     else
     {
-        result -> BB_setXMin (m_xMin) ;
+        result.BB_setXMin (m_xMin) ;
     }
     /************************** Cote le moins a droite. ***************************/
-    if (m_xMax >= bb -> BB_getXMax ())
+    if (m_xMax >= bb.BB_getXMax ())
     {
-        result -> BB_setXMax (bb -> BB_getXMax ()) ;
+        result.BB_setXMax (bb.BB_getXMax ()) ;
     }
     else
     {
-        result -> BB_setXMax (m_xMax) ;
+        result.BB_setXMax (m_xMax) ;
     }
     /*************************** Cote le moins en bas. ****************************/
-    if (m_yMin <= bb -> BB_getYMin ())
+    if (m_yMin <= bb.BB_getYMin ())
     {
-        result -> BB_setYMin (bb -> BB_getYMin ()) ;
+        result.BB_setYMin (bb.BB_getYMin ()) ;
     }
     else
     {
-        result -> BB_setYMin (m_yMin) ;
+        result.BB_setYMin (m_yMin) ;
     }
     /*************************** Cote le moins en haut. ***************************/
-    if (m_yMax >= bb -> BB_getYMax ())
+    if (m_yMax >= bb.BB_getYMax ())
     {
-        result -> BB_setYMax (bb -> BB_getYMax ()) ;
+        result.BB_setYMax (bb.BB_getYMax ()) ;
     }
     else
     {
-        result -> BB_setYMax (m_yMax) ;
+        result.BB_setYMax (m_yMax) ;
     }
     /******************************************************************************/
 
     return result ;
 }
 
-BoundingBox * BoundingBox::operator - (BoundingBox * bb)
+BoundingBox BoundingBox::operator - (BoundingBox bb)
 {
-    return this ;
+    return * this ;
 }
 
 bool BoundingBox::BB_isEmpty ()

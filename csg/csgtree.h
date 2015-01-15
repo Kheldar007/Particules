@@ -10,6 +10,7 @@
 
 # include <algorithm>
 # include "csgnode.h"
+# include "csgoperation.h"
 # include "csgprimitive.h"
 # include "image2grey.h"
 # include <map>
@@ -28,7 +29,6 @@ class Sort
             return (node1 -> CN_getIdentifier () < node2 -> CN_getIdentifier ()) ;
         }
 } ;
-
 
 /**
  * @brief CsgTree Arbre.
@@ -100,6 +100,7 @@ class CsgTree
          */
         void CT_swapSons (CsgNode * node) ;
         void CT_addPrimitive (CsgPrimitive * primitive) ;
+        void CT_addOperation (CsgOperation operation , CsgNode * node1 , CsgNode * node2) ;
 } ;
 
 

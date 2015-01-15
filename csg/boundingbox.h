@@ -99,19 +99,19 @@ class BoundingBox
          * @param  bb Une boite englobante.
          * @return Nouvelle boite englobante.
          */
-        BoundingBox * operator + (BoundingBox * bb) ;
+        BoundingBox operator + (BoundingBox bb) ;
         /**
          * @brief  operator ^ Intersection.
          * @param  bb Une boite englobante.
          * @return Nouvelle boite englobante.
          */
-        BoundingBox * operator ^ (BoundingBox * bb) ;
+        BoundingBox operator ^ (BoundingBox bb) ;
         /**
          * @brief  operator - Soustraction.
          * @param  bb Une boite englobante.
          * @return Nouvelle boite englobante.
          */
-        BoundingBox * operator - (BoundingBox * bb) ;
+        BoundingBox operator -(BoundingBox bb) ;
 
         /******************************************************************************/
 
