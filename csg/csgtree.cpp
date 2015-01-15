@@ -77,101 +77,18 @@ CsgNode * CsgTree::CT_clone (int id)
     return result ;
 }
 
-void CsgTree::CT_deleteNodesRec (CsgNode * node)
-{
-    m_map.erase (node -> CN_getIdentifier ()) ; // Supprimer de la map.
-    node -> CN_getParent () -> CN_setLeftChild (node -> CN_getLeftChild ()) ;
-    node -> CN_getParent () -> CN_setRightChild (node -> CN_getRightChild ()) ;
-    delete node ;
-}
-
 void CsgTree::CT_deleteNode (int id)
 {
-    CsgNode * node = CT_map (id) ; // Rechercher le noeud.
-    assert (node != NULL) ; // Si le noeud existe.
+    CsgNode * node = CT_map (id) ;
     std::set <CsgNode *>::iterator it = m_roots.find (node) ;
     if (it != m_roots.end ()) // Le noeud correspond a une racine.
     {
         m_roots.erase (node) ; // Supprimer l'element.
-        delete node ;
     }
-    else
-    {
-        CsgNode * parent = node -> CN_getParent () ;
-        assert (parent != NULL) ; // Verifier qu'il n'y ait pas d'erreur. Si le noeud n'est pas une racine, il ne devrait pas avoir de parent.
-        std::set <CsgNode *>::iterator it2 = m_roots.find (parent) ;
-        if (it2 != m_roots.end ()) // Si le pere est une racine.
-        {
-            CT_deleteNodesRec (node) ;
-            m_roots.erase (parent) ;
-            if (parent -> CN_getLeftChild () == node) // Si c'est le fils gauche, placer le fils droit dans la racine.
-            {
-                m_roots.insert (parent -> CN_getRightChild ()) ;
-                parent -> CN_setRightChild (NULL) ;
-                delete (parent) ;
-            }
-            else if (parent -> CN_getRightChild () == node) // Si c'est le fils droit, placer le fils gauche dans la racine.
-            {
-                m_roots.insert (parent -> CN_getLeftChild ()) ;
-                parent -> CN_setLeftChild (NULL) ;
-                delete (parent) ;
-            }
-        }
-        else
-        {
-            CsgNode * grandParent = parent -> CN_getParent () ;
-            assert (grandParent != NULL) ; // Il y a un grand-parent, vu que le parent n'est pas dans la racine.
-            std::set <CsgNode *>::iterator it3 = m_roots.find (grandParent) ;
-//            if(it3 != m_roots.end())//Cas général grand père qui est racine
-//            {
-//                removeNodeRec(new_ptr);
-//                csgNode * parent = new_ptr->CN_getParent ();
-//                csgNode * grandParent = (new_ptr->CN_getParent ())->CN_getParent ();
-//                if(static_cast<csgOperation *>(new_ptr->CN_getParent ())->isLeft(new_ptr))
-//                {
-//                    if(static_cast<csgOperation *>(grandParent)->isLeft(parent))
-//                    {
-//                        (grandParent)->setLeft(static_cast<csgOperation *>(parent)->getRight());
-//                        (parent)->setRight(NULL);
-//                        delete parent;
-//                    }
-//                    else if(static_cast<csgOperation *>(grandParent)->isRight(parent))
-//                    {
-//                        (grandParent)->setRight(static_cast<csgOperation *>(parent)->getRight());
-//                        (parent)->setRight(NULL);
-//                        delete parent;
-//                    }
-//                    else
-//                    {
-//                        assert(0);
-//                    }
-//                }
-//                else if(static_cast<csgOperation *>(new_ptr->CN_getParent ())->isRight(new_ptr))
-//                {
-//                    if(static_cast<csgOperation *>(grandParent)->isLeft(parent))
-//                    {
-//                        (grandParent)->setLeft(static_cast<csgOperation *>(parent)->getLeft());
-//                        (parent)->setLeft(NULL);
-//                        delete parent;
-//                    }
-//                    else if(static_cast<csgOperation *>(grandParent)->isRight(parent))
-//                    {
-//                        (grandParent)->setRight(static_cast<csgOperation *>(parent)->getLeft());
-//                        (parent)->setLeft(NULL);
-//                        delete parent;
-//                    }
-//                    else
-//                    {
-//                        assert(0);
-//                    }
-//                }
-//                else
-//                {
-//                    assert(0);
-//                }
-//            }
-        }
-    }
+    m_map.erase (id) ; // Supprimer de la map.
+    m_roots.insert (node ->CN_getLeftChild ()) ; // Rajouter les fils dans m_roots.
+    m_roots.insert (node ->CN_getRightChild ()) ;
+    delete node ;
 }
 
 void CsgTree::CT_swapSons (CsgNode * node)

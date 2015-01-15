@@ -89,7 +89,6 @@ class CsgTree
          * @return Copie de node.
          */
         CsgNode * CT_clone (int id) ;
-        void CT_deleteNodesRec (CsgNode * node) ;
         /**
          * @brief CT_deleteNode Enlever un noeud et remettre ses deux fils dans les racines.
          * @param id
