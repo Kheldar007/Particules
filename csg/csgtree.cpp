@@ -77,12 +77,28 @@ CsgNode * CsgTree::CT_clone (int id)
     return result ;
 }
 
+void CsgTree::CT_deleteNodesRec (CsgNode * node)
+{
+    m_map.erase (node -> CN_getIdentifier ()) ; // Supprimer de la map.
+//    if (dynamic_cast <CsgPrimitive *> (node) != NULL) // Si c'est une primitive.
+//    {
+//        m_leaves.erase (node) ; // Supprimer des feuilles, car c'est une primitive.
+//    }
+//    else if (dynamic_cast <CsgOperation *> (node) != NULL) // C'est une operation.
+//    {
+//        /***************** Supprimer les enfants, leurs enfants etc. ******************/
+//        CT_deleteNodesRec (node -> CN_getLeftChild ()) ;
+//        CT_deleteNodesRec (node -> CN_getRightChild ()) ;
+//        /******************************************************************************/
+//    }
+}
+
 void CsgTree::CT_deleteNode (int id)
 {
     CsgNode * node = CT_map (id) ; // Rechercher le noeud.
     assert (node != NULL) ; // Si le noeud existe.
     std::set <CsgNode *>::iterator it = m_roots.find (node) ;
-//    if (it != m_roots.end ()) // Le noeud correspond a une racine.
+    if (it != m_roots.end ()) // Le noeud correspond a une racine.
     {
         m_roots.erase (node) ; // Supprimer l'element.
         delete node ;
