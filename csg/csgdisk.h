@@ -8,6 +8,9 @@
 # define CSGDISK_H
 
 
+/**
+ * @brief CsgDisk Un disque.
+ */
 class CsgDisk
 {
     public :

@@ -8,9 +8,16 @@
 # define CSGPRIMITIVE_H
 
 
-class CsgPrimitive
+# include "csgnode.h"
+
+
+/**
+ * @brief CsgPrimitive Une primitive.
+ */
+class CsgPrimitive : public CsgNode
 {
     public :
+
         CsgPrimitive () ;
 } ;
 

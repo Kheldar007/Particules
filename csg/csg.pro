@@ -14,7 +14,7 @@ SOURCES += *.cpp \
     csgoperation.cpp \
     csgprimitive.cpp \
     csgdisk.cpp \
-    csgpolygon.cpp
+    csgregularpolygon.cpp
 
 HEADERS += *.h \
     boundingbox.h \
@@ -23,7 +23,7 @@ HEADERS += *.h \
     csgoperation.h \
     csgprimitive.h \
     csgdisk.h \
-    csgpolygon.h
+    csgregularpolygon.h
 
 DESTDIR = ../lib
 

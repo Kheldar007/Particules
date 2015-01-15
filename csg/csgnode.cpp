@@ -28,6 +28,11 @@ void CsgNode::CN_setBoundingBox (BoundingBox bb)
     m_boundingBox = bb ; // Affecter la bounding box.
 }
 
+void CsgNode::CN_setParent (CsgNode * node)
+{
+    m_parent = node ;
+}
+
 void CsgNode::CN_setLeftChild (CsgNode * node)
 {
     m_leftChild = node ;

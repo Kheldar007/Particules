@@ -57,6 +57,11 @@ class CsgNode
          */
         void CN_setBoundingBox (BoundingBox bb) ;
         /**
+         * @brief CN_setParent Mutateur.
+         * @param node m_parent
+         */
+        void CN_setParent (CsgNode * node) ;
+        /**
          * @brief CN_setLeftChild Mutateur.
          * @param node m_leftChild
          */

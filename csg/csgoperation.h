@@ -8,7 +8,13 @@
 # define CSGOPERATION_H
 
 
-class CsgOperation
+# include "csgnode.h"
+
+
+/**
+ * @brief CsgOperation Une operation.
+ */
+class CsgOperation : public CsgNode
 {
     public :
         CsgOperation () ;

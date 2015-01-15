@@ -89,3 +89,12 @@ void CsgTree::CT_swapSons (CsgNode * node)
     node -> CN_setLeftChild (node -> CN_getRightChild ()) ;
     node -> CN_setRightChild (node_t) ;
 }
+
+void CsgTree::CT_addPrimitive (CsgPrimitive * primitive)
+{
+    CsgNode * node = primitive ; // La primitive doit etre un CsgNode.
+    m_leaves.insert (node) ;
+    m_roots.insert (node) ;
+    m_map.insert (std::pair <int , CsgNode *> (node -> CN_getIdentifier () ,
+        node)) ;
+}

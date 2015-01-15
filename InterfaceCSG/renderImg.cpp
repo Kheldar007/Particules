@@ -33,7 +33,7 @@ void RenderImg::loadTexture(const std::string& filename)
 	// VOTRE CODE ICI
 
     Image2Grey i ;
-//    i.I2G_loadFromPGM(filename);
+    i.I2G_loadFromPGM(filename);
 
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, m_widthTex, m_heightTex, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, m_ptrTex);

@@ -10,6 +10,7 @@
 
 # include <algorithm>
 # include "csgnode.h"
+# include "csgprimitive.h"
 # include "image2grey.h"
 # include <map>
 # include <set>
@@ -98,6 +99,7 @@ class CsgTree
          * @param node Le noeud.
          */
         void CT_swapSons (CsgNode * node) ;
+        void CT_addPrimitive (CsgPrimitive * primitive) ;
 } ;
 
 
