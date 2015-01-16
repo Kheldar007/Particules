@@ -4,17 +4,6 @@ M1 ISI
 Janvier 2015
 
 
-TODO :
-- Image2Grey::I2G_smoothing
-- GradientSobel::GradientSobel
-- CsgTree::CT_load
-- CsgTree::CT_save
-- CsgTree::CT_draw
-- CsgTree::CT_deleteNode
-- CsgTree::CT_deleteNodeRec
-  probleme avec les dynamic cast
-
-
 Comment faire pour pouvoir écrire V = 0.5f * V ?
 -> En mettant des operateurs binaires non-membres de la classe.
 

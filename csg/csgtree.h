@@ -83,7 +83,7 @@ class CsgTree
          * @param image       L'image.
          * @param currentNode Le noeud courant.
          */
-        void CT_draw (const Image2Grey & image , CsgNode * currentNode) ;
+        void CT_draw (Image2Grey & image , CsgNode * currentNode) ;
         /**
          * @brief  CT_clone Cloner un noeud.
          * @param  node Le noeud a cloner
@@ -100,7 +100,18 @@ class CsgTree
          * @param node Le noeud.
          */
         void CT_swapSons (CsgNode * node) ;
+        /**
+         * @brief CT_addPrimitive Ajouter une primitive.
+         * @param primitive La primitive.
+         */
         void CT_addPrimitive (CsgPrimitive * primitive) ;
+        /**
+         * @brief  CT_addOperation Ajouter une operation.
+         * @param  operation L'operation.
+         * @param  node1     Le premier fils.
+         * @param  node2     Le deuxieme fils.
+         * @return
+         */
         CsgNode * CT_addOperation(Operation operation , CsgNode * node1 ,
             CsgNode * node2) ;
 } ;

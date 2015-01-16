@@ -39,6 +39,21 @@ Vec3f Matrix33f::M_getColumn3 ()
     return column3 ; // Renvoyer la troisieme colonne.
 }
 
+void Matrix33f::M_setColumn1 (Vec3f c)
+{
+    column1 = c ;
+}
+
+void Matrix33f::M_setColumn2 (Vec3f c)
+{
+    column2 = c ;
+}
+
+void Matrix33f::M_setColumn3 (Vec3f c)
+{
+    column3 = c ;
+}
+
 Matrix33f Matrix33f::M_reverse () const
 {
     float determinant = (column1 [0] * column2 [1] * column3 [2]) +
@@ -136,4 +151,32 @@ Vec3f Matrix33f::operator * (const Vec3f & v) const
     float l3 = (column1 [2] * v [0]) + (column2 [2] * v [1]) + (column3 [2] * v [2]) ;
 
     return Vec3f (l1 , l2 , l3) ;
+}
+
+Matrix33f operator*(Matrix33f m1, Matrix33f m2)
+{
+    Matrix33f res;
+
+    res.column1[0] = m1.M_getColumn1 ()[0] * m2.M_getColumn1 ()[0] + m1.M_getColumn2 ()[0] * m2.M_getColumn1 ()[1] + m1.M_getColumn3 ()[0] * m2.M_getColumn1 ()[2];
+    res.column1[1] = m1.M_getColumn1 ()[1] * m2.M_getColumn1 ()[0] + m1.M_getColumn2 ()[1] * m2.M_getColumn1 ()[1] + m1.M_getColumn3 ()[1] * m2.M_getColumn1 ()[2];
+    res.column1[2] = m1.M_getColumn1 ()[2] * m2.M_getColumn1 ()[0] + m1.M_getColumn2 ()[2] * m2.M_getColumn1 ()[1] + m1.M_getColumn3 ()[2] * m2.M_getColumn1 ()[2];
+    res.column2[0] = m1.M_getColumn1 ()[0] * m2.M_getColumn2 ()[0] + m1.M_getColumn2 ()[0] * m2.M_getColumn2 ()[1] + m1.M_getColumn3 ()[0] * m2.M_getColumn2 ()[2];
+    res.column2[1] = m1.M_getColumn1 ()[1] * m2.M_getColumn2 ()[0] + m1.M_getColumn2 ()[1] * m2.M_getColumn2 ()[1] + m1.M_getColumn3 ()[1] * m2.M_getColumn2 ()[2];
+    res.column2[2] = m1.M_getColumn1 ()[2] * m2.M_getColumn2 ()[0] + m1.M_getColumn2 ()[2] * m2.M_getColumn2 ()[1] + m1.M_getColumn3 ()[2] * m2.M_getColumn2 ()[2];
+    res.column3[0] = m1.M_getColumn1 ()[0] * m2.M_getColumn3 ()[0] + m1.M_getColumn2 ()[0] * m2.M_getColumn3 ()[1] + m1.M_getColumn3 ()[0] * m2.M_getColumn3 ()[2];
+    res.column3[1] = m1.M_getColumn1 ()[1] * m2.M_getColumn3 ()[0] + m1.M_getColumn2 ()[1] * m2.M_getColumn3 ()[1] + m1.M_getColumn3 ()[1] * m2.M_getColumn3 ()[2];
+    res.column3[2] = m1.M_getColumn1 ()[2] * m2.M_getColumn3 ()[0] + m1.M_getColumn2 ()[2] * m2.M_getColumn3 ()[1] + m1.M_getColumn3 ()[2] * m2.M_getColumn3 ()[2];
+
+    return res;
+}
+
+Vec3f operator*(Matrix33f m, Vec3f c)
+{
+    Vec3f res;
+
+    res[0] = m.M_getColumn1 ()[0] * c[0] + m.M_getColumn2 ()[0] * c[1] + m.M_getColumn3 ()[0] * c[2];
+    res[1] = m.M_getColumn1 ()[1] * c[0] + m.M_getColumn2 ()[1] * c[1] + m.M_getColumn3 ()[1] * c[2];
+    res[2] = m.M_getColumn1 ()[2] * c[0] + m.M_getColumn2 ()[2] * c[1] + m.M_getColumn3 ()[2] * c[2];
+
+    return res;
 }

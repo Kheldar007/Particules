@@ -18,7 +18,7 @@
  */
 class Matrix33f
 {
-    protected :
+    public :
         /**
          * @brief column1 Premiere colonne de la matrice.
          */
@@ -31,8 +31,6 @@ class Matrix33f
          * @brief column3 Troisieme colonne de la matrice.
          */
         Vec3f column3 ;
-
-    public :
 
         /******************************* Constructeurs. *******************************/
 
@@ -75,6 +73,10 @@ class Matrix33f
         Vec3f M_getColumn3 () ;
 
         /******************************************************************************/
+
+        void M_setColumn1 (Vec3f c) ;
+        void M_setColumn2 (Vec3f c) ;
+        void M_setColumn3 (Vec3f c) ;
 
         /**
          * @brief  M_reverse Inverser la matrice.
@@ -121,6 +123,9 @@ class Matrix33f
          */
         Vec3f operator * (const Vec3f & v) const ;
 } ;
+
+        Matrix33f operator*(Matrix33f m1, Matrix33f m2);
+        Vec3f operator*(Matrix33f m, Vec3f c);
 
 
 # endif

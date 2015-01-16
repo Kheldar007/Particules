@@ -33,35 +33,33 @@ void CsgTree::CT_save (std::string format)
 {
 }
 
-void CsgTree::CT_draw (const Image2Grey & image , CsgNode * currentNode)
+void CsgTree::CT_draw (Image2Grey & image , CsgNode * currentNode)
 {
-    currentNode -> CN_set_BB (currentNode -> get_BB ()) ;
-    CsgNode * castedNode = static_cast <CsgNode *> (currentNode) ;
-    int i = castedNode -> get_BB ().BB_getXMin () , j = 0 ;
-    while (i < castedNode -> get_BB ().BB_getXMax ()) // Parcourir la bounding box en largeur.
+    Vec3f v ;
+    int i = currentNode -> CN_getBoundingBox ().BB_getXMin () , j;
+    while (i < currentNode -> CN_getBoundingBox ().BB_getXMax ()) // Parcourir la bounding box en largeur.
     {
-        j = castedNode -> get_BB ().BB_getYMin () ;
-        while (j < castedNode -> get_BB ().BB_getYMax ()) // Parcourir la bounding box en hauteur.
+        j = currentNode -> CN_getBoundingBox ().BB_getYMin () ;
+        while (j < currentNode -> CN_getBoundingBox ().BB_getYMax ()) // Parcourir la bounding box en hauteur.
         {
-            if ((i >= 0) && (i < image.I2D_getDimension () [0]) && (j >= 0) && (j < image.I2D_getDimension () [1]))
+            if ((i >= 0) && (i < image.I2D_getDimension()[0]) && (j >= 0) && (j < image.I2D_getDimension()[1]))
             {
-//                if ((* it) -> intersect (x , y))
-//                {
-//                    image.I2D_setPixel (j , i , 1) ;
-//                }
-//                else
-//                {
-//                    image.I2D_setPixel (j , i , 0) ;
-//                }
+                v [0] = i ;
+                v[1] = j ;
+                if (currentNode -> intersect (v))
+                {
+                    image.I2D_setPixel (j , i , 255) ;
+                }
+                else
+                {
+                    image.I2D_setPixel (j , i , 0) ;
+                }
             }
-
             j ++ ;
         }
-
         i ++ ;
     }
 
-    i ++ ;
 }
 
 CsgNode * CsgTree::CT_clone (int id)
@@ -78,14 +76,21 @@ CsgNode * CsgTree::CT_clone (int id)
 void CsgTree::CT_deleteNode (int id)
 {
     CsgNode * node = CT_map (id) ;
+    CsgNode * filsG = node ->CN_getLeftChild ();
+    CsgNode * filsD = node ->CN_getRightChild ();
+
     std::set <CsgNode *>::iterator it = m_roots.find (node) ;
     if (it != m_roots.end ()) // Le noeud correspond a une racine.
     {
         m_roots.erase (node) ; // Supprimer l'element.
     }
     m_map.erase (id) ; // Supprimer de la map.
-    m_roots.insert (node ->CN_getLeftChild ()) ; // Rajouter les fils dans m_roots.
-    m_roots.insert (node ->CN_getRightChild ()) ;
+    m_roots.insert (filsG) ; // Rajouter les fils dans m_roots.
+    m_roots.insert (filsD) ;
+
+    // on met les fils.m_parent a NULL, car une racine n'a pas de parent.
+    filsG->CN_setParent(NULL);
+    filsD->CN_setParent(NULL);
     delete node ;
 }
 
@@ -103,6 +108,7 @@ void CsgTree::CT_addPrimitive (CsgPrimitive * primitive)
     m_roots.insert (node) ;
     m_map.insert (std::pair <int , CsgNode *> (node -> CN_getIdentifier () ,
         node)) ;
+    node -> countId++;
 }
 
 CsgNode * CsgTree::CT_addOperation (Operation operation , CsgNode * node1 ,
@@ -111,12 +117,13 @@ CsgNode * CsgTree::CT_addOperation (Operation operation , CsgNode * node1 ,
     /***************** Chercher les deux noeuds dans les racines. *****************/
     std::set <CsgNode * , Sort>::iterator it1 = m_roots.find (node1) ;
     std::set <CsgNode * , Sort>::iterator it2 = m_roots.find (node2) ;
+
+    // on test si it1 it2 non null
     assert (it1 != m_roots.end ()) ;
     assert (it2 != m_roots.end ()) ;
-    /******************************************************************************/
 
     CsgNode * node = new CsgOperation (operation , node1 , node2) ;
-    static_cast <CsgOperation *> (node) -> get_BB () ;
+    node->CN_getBoundingBox() ;
 
     /****************** Suppression des noeuds dans les racines. ******************/
     m_roots.erase (it1) ;
@@ -127,5 +134,6 @@ CsgNode * CsgTree::CT_addOperation (Operation operation , CsgNode * node1 ,
     m_map.insert (std::pair <int , CsgNode *> (node -> CN_getIdentifier () ,
         node)) ;
 
-    node ;
+    // On renvoie le node courant.
+    return node;
 }

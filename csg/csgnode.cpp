@@ -10,9 +10,19 @@
 CsgNode::CsgNode ()
 {
     m_parent     = NULL ; // Par defaut pour la racine, pas de parent.
-    m_identifier = 0 ; // La racine est 0.
+    m_identifier = countId; ; // La racine est 0.
     m_leftChild    = NULL ; // Pas de fils gauche.
     m_rightChild   = NULL ; // Pas de fils droit.
+    m_boundingBox = BoundingBox();
+    m_position = Matrix33f(1.0f , 0 , 0 , 0 , 1.0f , 0 , 0 , 0 , 1.0f);
+    m_rotation = Matrix33f(1.0f , 0 , 0 , 0 , 1.0f , 0 , 0 , 0 , 1.0f);
+    m_scale = Matrix33f(1.0f , 0 , 0 , 0 , 1.0f , 0 , 0 , 0 , 1.0f);
+}
+
+int CsgNode::countId =0;
+
+CsgNode::~CsgNode ()
+{
 }
 
 CsgNode::CsgNode (int id, CsgNode * p)
@@ -21,9 +31,13 @@ CsgNode::CsgNode (int id, CsgNode * p)
     m_parent     = p ; // Le parent du noeud courant.
     m_leftChild  = NULL ; // Pas de fils gauche.
     m_rightChild = NULL ; // Pas de fils droit.
+    m_boundingBox = BoundingBox();
+    m_position = Matrix33f(1.0f , 0 , 0 , 0 , 1.0f , 0 , 0 , 0 , 1.0f);
+    m_rotation = Matrix33f(1.0f , 0 , 0 , 0 , 1.0f , 0 , 0 , 0 , 1.0f);
+    m_scale = Matrix33f(1.0f , 0 , 0 , 0 , 1.0f , 0 , 0 , 0 , 1.0f);
 }
 
-void CsgNode::CN_set_BB (BoundingBox bb)
+void CsgNode::CN_set_BB (BoundingBox& bb)
 {
     m_boundingBox = bb ; // Affecter la bounding box.
 }
@@ -63,12 +77,60 @@ CsgNode * CsgNode::CN_getRightChild ()
     return m_rightChild ;
 }
 
-BoundingBox CsgNode::get_local_BB ()
+BoundingBox & CsgNode::CN_getBoundingBox ()
 {
     return m_boundingBox ;
 }
 
-BoundingBox CsgNode::get_BB ()
+void CsgNode::update_BB ()
 {
-    return m_boundingBox ;
+}
+
+bool CsgNode::intersect (Vec3f vector)
+{
+}
+
+
+Matrix33f CsgNode::CN_getTransformation()
+{
+    m_transform = m_scale * m_rotation * m_position;
+
+    if(CN_getParent() == NULL)
+    {
+        return m_transform;
+    }
+    else
+    {
+        return CN_getParent()->CN_getTransformation() * m_transform;
+    }
+}
+
+const Matrix33f &CsgNode::CN_getPosition()
+{
+    return m_position;
+}
+
+const Matrix33f &CsgNode::CN_getRotation()
+{
+    return m_rotation;
+}
+
+const Matrix33f &CsgNode::CN_getScale()
+{
+    return m_scale;
+}
+
+void CsgNode::CN_setPosition(Matrix33f& m)
+{
+    m_position = m;
+}
+
+void CsgNode::CN_setRotation(Matrix33f& m)
+{
+    m_rotation = m;
+}
+
+void CsgNode::CN_setScale(Matrix33f& m)
+{
+    m_scale = m;
 }

@@ -9,6 +9,7 @@
 
 
 # include "vec2f.h"
+# include "vec3f.h"
 
 
 /**
@@ -130,7 +131,7 @@ class BoundingBox
          * @param  vector Le point.
          * @return Vrai s'il est dedans.
          */
-        bool BB_isInside (const Vec2f & vector) ;
+        bool BB_isInside (const Vec3f & vector) ;
         /**
          * @brief BB_addVector Ajouter un point a la boite.
          * @param vector Le point a ajouter.

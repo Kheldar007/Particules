@@ -166,7 +166,7 @@ Vec2f * BoundingBox::BB_center ()
     return new Vec2f ((m_xMax - m_xMin) / 2 , (m_yMax - m_yMin) / 2) ;
 }
 
-bool BoundingBox::BB_isInside (const Vec2f & vector)
+bool BoundingBox::BB_isInside (const Vec3f & vector)
 {
     if ((vector [0] >= m_xMin) && (vector [0] <= m_xMax) &&
         (vector [1] >= m_yMin) && (vector [1] <= m_yMax))
