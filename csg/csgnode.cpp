@@ -82,6 +82,8 @@ BoundingBox & CsgNode::CN_getBoundingBox ()
     return m_boundingBox ;
 }
 
+
+// on l'appelle a chaque changement des matrice Scale-Rotation-Position
 void CsgNode::update_BB ()
 {
 }

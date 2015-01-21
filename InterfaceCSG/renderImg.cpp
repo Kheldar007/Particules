@@ -65,7 +65,7 @@ unsigned int RenderImg::getWidth()
 
 unsigned int RenderImg::getHeight()
 {
-        return m_heightTex;
+    return m_heightTex;
 }
 
 Image2Grey & RenderImg::getImg ()
@@ -81,7 +81,7 @@ RenderImg::~RenderImg()
 
 void RenderImg::initializeGL()
 {
-	glClearColor(0.0f,0.0f,0.4f,0.0f);
+    glClearColor(0.0f,0.0f,0.0f,0.0f);
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_LIGHTING);
 
@@ -102,14 +102,14 @@ void RenderImg::initializeGL()
     //****************************
     // CODE_TP_CERCLE
     //****************************
-    for (int i=0; i< NB_P_CIRCLE; ++i)
-	{
-		VectCalc& v= m_circlePoints[i];
-        v[0] = 0.5*cos(2.0f*M_PI/NB_P_CIRCLE*i);
-        v[1] = 0.5*sin(2.0f*M_PI/NB_P_CIRCLE*i);
-	}
+//    for (int i=0; i< NB_P_CIRCLE; ++i)
+//    {
+//        VectCalc& v= m_circlePoints[i];
+//        v[0] = 0.5*cos(2.0f*M_PI/NB_P_CIRCLE*i);
+//        v[1] = 0.5*sin(2.0f*M_PI/NB_P_CIRCLE*i);
+//    }
 
-	m_center.zero();
+//    m_center.zero();
 
 }
 
@@ -122,17 +122,17 @@ void RenderImg::paintGL()
 //****************************
 // CODE_TP_CERCLE
 //****************************
-	glPointSize(2.0f);
-	glColor3f(1.,1,0.);
-	glBegin(GL_POINTS);
+    glPointSize(2.0f);
+    glColor3f(1.,1,0.);
+    glBegin(GL_QUADS);
     for (int i=0; i< NB_P_CIRCLE; ++i)
-	{
-		VectCalc P(m_circlePoints[i]);
+    {
+        VectCalc P(m_circlePoints[i]);
         P *= m_radius;
         P += (0.1*m_center);
-		glVertex2fv(P.data());
-	}
-	glEnd();
+        glVertex2fv(P.data());
+    }
+    glEnd();
 
 
 //    glEnable(GL_TEXTURE_2D);

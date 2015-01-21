@@ -30,10 +30,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->HLayout->insertWidget(0,m_render,99);
     m_render->setFocusPolicy(Qt::ClickFocus);
 
-    ui->translationX->setMinimum(-int(m_render->getWidth()/2));
-    ui->translationX->setMaximum(m_render->getWidth()/2);
-    ui->translationY->setMinimum(-int(m_render->getHeight()/2));
-    ui->translationY->setMaximum(m_render->getHeight()/2);
+    ui->translationX->setMinimum(-100);
+    ui->translationX->setMaximum(100);
+    ui->translationY->setMinimum(-100);
+    ui->translationY->setMaximum(100);
 
     ui->scaleX->setMinimum(-100);
     ui->scaleX->setMaximum(100);
@@ -202,45 +202,51 @@ void MainWindow::transfoChanged()
 {
     // recupere la primitive courante et lui applique les transformations
     // VOTRE CODE ICI
+    if(m_currentNode != NULL)
+    {
 //	std::cout << "transX: " << ui->dsb_tx->value() << "\ntransY: "<< ui->dsb_ty->value() << std::endl;
-    float tx = (float) ui->dsb_tx->value();
-    float ty = (float) ui->dsb_ty->value();
-    Vec2f vt(tx, ty);
+        float tx = (float) ui->dsb_tx->value();
+        float ty = (float) ui->dsb_ty->value();
+        Vec2f vt(tx, ty);
 
-    float sx = (float) ui->dsb_sx->value();
-    float sy = (float) ui->dsb_sy->value();
-    Vec2f vs(sx, sy);
+        float sx = (float) ui->dsb_sx->value();
+        float sy = (float) ui->dsb_sy->value();
+        Vec2f vs(sx, sy);
 
-    float theta = (float) ui->dsb_Rot->value();
+        float theta = (float) ui->dsb_Rot->value();
+        Matrix33f m;
+
+        m = m_currentNode->CN_getPosition() ;
+        m.M_setTranslate(vt) ;
+        m_currentNode->CN_setPosition(m) ;
+
+        m = m_currentNode->CN_getRotation() ;
+        m.M_setRotate(theta) ;
+        m_currentNode->CN_setRotation(m) ;
+
+        m = m_currentNode->CN_getScale() ;
+        m.M_applyHomothety(vs) ;
+        m_currentNode->CN_setScale(m) ;
+
+        //m_currentNode->m_rotation =;
+
+        //m_currentNode->set_scale( ui->scaleX->value(), ui->scaleY->value() ) ;
 
 
-    Matrix33f mt = m_currentNode->CN_getPosition() ;
-    mt.M_setTranslate(vt) ;
-    m_currentNode->CN_setPosition(mt) ;
+    //	//****************************
+    //	// CODE_TP_CERCLE
+    //	//****************************
+    //	m_render->setRadius(ui->dsb_sx->value());
+    //	m_render->setCenter(ui->dsb_tx->value(),ui->dsb_ty->value());
 
-    Matrix33f mr = m_currentNode->CN_getRotation() ;
-    mr.M_applyRotate(theta) ;
-    m_currentNode->CN_setRotation(mr) ;
+        // Option: de même avec un noeud Operation !
 
-    Matrix33f ms = m_currentNode->CN_getScale() ;
-    ms.M_applyHomothety(vs) ;
-    m_currentNode->CN_setScale(ms) ;
+        // operation est un node, qui contient les matrices. deja géré.
 
-    //m_currentNode->m_rotation =;
-
-    //m_currentNode->set_scale( ui->scaleX->value(), ui->scaleY->value() ) ;
-
-
-//	//****************************
-//	// CODE_TP_CERCLE
-//	//****************************
-//	m_render->setRadius(ui->dsb_sx->value());
-//	m_render->setCenter(ui->dsb_tx->value(),ui->dsb_ty->value());
-
-    // Option: de même avec un noeud Operation !
-
-    // operation est un node, qui contient les matrices. deja géré.
-    drawTree();
+        // on redéfinit la BB a chaque transformation
+        m_currentNode -> update_BB();
+        drawTree();
+       }
 }
 
 #define S1_FACTOR 10.0
@@ -514,7 +520,7 @@ void MainWindow::checkDrawCurrent()
 
 GraphTextEdit::GraphTextEdit()
 {
-    this->resize(800,800);
+    this->resize(600,6);
     this->setWindowTitle("CSG-Graph");
     this->setReadOnly(true);
     this->setWordWrapMode(QTextOption::NoWrap);
